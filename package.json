@@ -1,0 +1,20 @@
+{
+  "name": "bot",
+  "version": "1.0.0",
+  "description": "Bot de l'entreprise International Logistique",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "forever": "^0.15.3",
+    "node-opus": "^0.2.7",
+    "npm": "^5.6.0",
+    "ytdl-core": "^0.20.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Maxime Chourré",
+  "license": "ISC"
+}
