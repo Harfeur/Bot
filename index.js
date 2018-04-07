@@ -143,6 +143,8 @@ client.on('ready', () => {
 	client.user.setActivity('sur le PC', {
 		type: 'PLAYING'
 	});
+	const testbot = "430951460558209035";
+	testbot.send("Bot démarré");
 });
 
 client.on('message', async msg => {
