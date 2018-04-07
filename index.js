@@ -137,7 +137,10 @@ const commands = {
 		msg.channel.send('Ping !\nPong !\nÀ jour !');
 	},
 	'reboot': (msg) => {
-		if (msg.author.id == config.MaxouCraft) process.exit();
+		if (msg.author.id == config.MaxouCraft) {
+			msg.channel.send("Redémarrage...");
+			process.exit();
+		}
 	}
 };
 
