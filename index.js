@@ -188,7 +188,7 @@ client.on('message', async msg => {
 
 client.on('guildMemberAdd', member => {
 	const general = "374842067983007744";
-	channel.send("Bienvenue à " + member.username + " !");
+	general.send("Bienvenue à " + member.username + " !");
 });
 
 client.login(process.env.token)
