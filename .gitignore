@@ -48,6 +48,4 @@ Temporary Items
 
 # Ignores
 node_modules/*
-
-"Lancer le bot.bat"
 config.json
