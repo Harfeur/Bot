@@ -134,10 +134,10 @@ const commands = {
 		fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
 	},
 	'ping': (msg) => {
-		msg.channel.send('Ping !\nPong !');
+		msg.channel.send('Ping !\nPong !\nÀ jour !');
 	},
 	'reboot': (msg) => {
-		if (msg.author.id == config.adminID) process.exit();
+		if (msg.author.id == config.MaxouCraft) process.exit();
 	}
 };
 
