@@ -6,7 +6,7 @@ let queue = {};
 
 const commands = {
 	'play': (msg) => {
-		if (queue[msg.guild.id] === undefined) return msg.channel.send(`Ajoutez d\'abbord des musiques avec ${process.env.IP.prefix}add`);
+		if (queue[msg.guild.id] === undefined) return msg.channel.send(`Ajoutez d\'abbord des musiques avec ${process.env.prefix}add`);
 		if (!msg.guild.voiceConnection) return commands.join(msg).then(() => commands.play(msg));
 		if (queue[msg.guild.id].playing) return msg.channel.send('Déja en lecture');
 		let dispatcher;
@@ -23,20 +23,20 @@ const commands = {
 			dispatcher = msg.guild.voiceConnection.playStream(yt(song.url, {
 				audioonly: true
 			}), {
-				passes: process.env.IP.passes
+				passes: process.env.passes
 			});
 			let collector = msg.channel.createCollector(m => m);
 			dispatcher.setVolume(0.2);
 			collector.on('message', m => {
-				if (m.content.startsWith(process.env.IP.prefix + 'pause')) {
+				if (m.content.startsWith(process.env.prefix + 'pause')) {
 					msg.channel.send('Mis en pause').then(() => {
 						dispatcher.pause();
 					});
-				} else if (m.content.startsWith(process.env.IP.prefix + 'resume')) {
+				} else if (m.content.startsWith(process.env.prefix + 'resume')) {
 					msg.channel.send('Reprise').then(() => {
 						dispatcher.resume();
 					});
-				} else if (m.content.startsWith(process.env.IP.prefix + 'skip')) {
+				} else if (m.content.startsWith(process.env.prefix + 'skip')) {
 					msg.channel.send('Passée').then(() => {
 						dispatcher.end();
 					});
@@ -48,7 +48,7 @@ const commands = {
 					if (Math.round(dispatcher.volume * 50) <= 0) return msg.channel.send(`Volume: ${Math.round(dispatcher.volume*50)}%`);
 					dispatcher.setVolume(Math.max((dispatcher.volume * 50 - (5 * (m.content.split('-').length - 1))) / 50, 0));
 					msg.channel.send(`Volume: ${Math.round(dispatcher.volume*50)}%`);
-				} else if (m.content.startsWith(process.env.IP.prefix + 'time')) {
+				} else if (m.content.startsWith(process.env.prefix + 'time')) {
 					msg.channel.send(`Temps: ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000)/1000) <10 ? '0'+Math.floor((dispatcher.time % 60000)/1000) : Math.floor((dispatcher.time % 60000)/1000)}`);
 				}
 			});
@@ -73,7 +73,7 @@ const commands = {
 	},
 	'add': (msg) => {
 		let url = msg.content.split(' ')[1];
-		if (url == '' || url === undefined) return msg.channel.send(`Vous devez ajouter un lien YouTube après ${process.env.IP.prefix}add`);
+		if (url == '' || url === undefined) return msg.channel.send(`Vous devez ajouter un lien YouTube après ${process.env.prefix}add`);
 		yt.getInfo(url, (err, info) => {
 			if (err) return msg.channel.send('Lien YouTube invalide: ' + err);
 			if (!queue.hasOwnProperty(msg.guild.id)) queue[msg.guild.id] = {}, queue[msg.guild.id].playing = false, queue[msg.guild.id].songs = [];
@@ -86,7 +86,7 @@ const commands = {
 		});
 	},
 	'queue': (msg) => {
-		if (queue[msg.guild.id] === undefined) return msg.channel.send(`Ajoutez des musiques à la queue avec ${process.env.IP.prefix}add`);
+		if (queue[msg.guild.id] === undefined) return msg.channel.send(`Ajoutez des musiques à la queue avec ${process.env.prefix}add`);
 		let tosend = [];
 		queue[msg.guild.id].songs.forEach((song, i) => {
 			tosend.push(`${i+1}. ${song.title} - Demandé par: ${song.requester}`);
@@ -124,14 +124,14 @@ const commands = {
 		msg.channel.send('```Ouille, ouille, ouille !\nAïe, aïe, aïe !\n\nSi vous faites une demande d\'assistance c\'est que le camion a 15% de dégats ou plus. \nPour cela, commencé par suivre les instructions de l\'article du règlement qui dit : \" En cas de dégâts importants, c’est à dire plus de 15 % vous devrez rejoindre le garage le plus proche et faire une demande d’assistance. Vous devrez également annuler votre mission actuelle.  Après réception de cette demande, une démarche sera engagé pour faire revenir le camion à l’entreprise. Vous devrez alors rejoindre un des garages de l’entreprise, le plus proche. Vous ne devez en aucun cas continuer de rouler avec le camion abîmé et cela pour se rapprocher le plus à la réalité.\"\n\nEnsuite prenez contact avec une personne hiérarchiquement supérieure à vous et elle vous dira la marche à suivre.```');
 	},
 	'help': (msg) => {
-		let tosend = ['```xl', process.env.IP.prefix + 'site : "Afficher le site de l\'entreprise"', process.env.IP.prefix + 'recrutement : "Affixher le formulaire pour rejoindre l\'entreprise"', process.env.IP.prefix + 'feuillederoute : "T�lécharger une feuille de route vierge"', process.env.IP.prefix + 'tb : Tutoriel TrucksBook et site', process.env.IP.prefix + 'accident : "Signaler un accident avec votre camion"', process.env.IP.prefix + 'assistance : "Signaler une demande d\'appel de d�paneuse pour votre camion"', '', 'Commandes pour la musique, uniquement si le bot est sur le PC :'.toUpperCase(), process.env.IP.prefix + 'join : "Envoyer le bot dans le canal audio actuel"', process.env.IP.prefix + 'add : "Ajouter un lien YouTube dans la queue"', process.env.IP.prefix + 'queue : "Affiche la queue actuelle."', process.env.IP.prefix + 'play : "Jouer la queue actuelle."', '', 'Ces commandes fonctionnent uniquement en lecture:'.toUpperCase(), process.env.IP.prefix + 'pause : "Pause la musique"', process.env.IP.prefix + 'resume : "Résume la musique"', process.env.IP.prefix + 'skip : "Saute la musique"', process.env.IP.prefix + 'time : "Affiche la durée de la musique"', 'volume+ : "Augmente le volume de 5%"', 'volume- : "Diminue le volume de 2%"', '```'];
+		let tosend = ['```xl', process.env.prefix + 'site : "Afficher le site de l\'entreprise"', process.env.prefix + 'recrutement : "Affixher le formulaire pour rejoindre l\'entreprise"', process.env.prefix + 'feuillederoute : "T�lécharger une feuille de route vierge"', process.env.prefix + 'tb : Tutoriel TrucksBook et site', process.env.prefix + 'accident : "Signaler un accident avec votre camion"', process.env.prefix + 'assistance : "Signaler une demande d\'appel de d�paneuse pour votre camion"', '', 'Commandes pour la musique, uniquement si le bot est sur le PC :'.toUpperCase(), process.env.prefix + 'join : "Envoyer le bot dans le canal audio actuel"', process.env.prefix + 'add : "Ajouter un lien YouTube dans la queue"', process.env.prefix + 'queue : "Affiche la queue actuelle."', process.env.prefix + 'play : "Jouer la queue actuelle."', '', 'Ces commandes fonctionnent uniquement en lecture:'.toUpperCase(), process.env.prefix + 'pause : "Pause la musique"', process.env.prefix + 'resume : "Résume la musique"', process.env.prefix + 'skip : "Saute la musique"', process.env.prefix + 'time : "Affiche la durée de la musique"', 'volume+ : "Augmente le volume de 5%"', 'volume- : "Diminue le volume de 2%"', '```'];
 		msg.channel.send(tosend.join('\n'));
 	},
 	'ping': (msg) => {
 		msg.channel.send('Ping !\nPong !\nÀ jour !');
 	},
 	'reboot': (msg) => {
-		if (msg.author.id == process.env.IP.MaxouCraft) {
+		if (msg.author.id == process.env.MaxouCraft) {
 			msg.channel.send("Redémarrage...");
 			process.exit();
 		}
@@ -146,7 +146,7 @@ client.on('ready', () => {
 });
 
 client.on('message', async msg => {
-	const args = msg.content.slice(process.env.IP.prefix.length).trim().split(/ +/g);
+	const args = msg.content.slice(process.env.prefix.length).trim().split(/ +/g);
 	const command = args.shift().toLowerCase();
 /*	if (msg.channel === 430951460558209035 || !message.author.bot) {
 
@@ -168,7 +168,7 @@ client.on('message', async msg => {
 	}
 
 	if (command === 'purge') {
-		if (msg.author.id == process.env.IP.MaxouCraft || msg.author.id == process.env.IP.Teddy || msg.author.id == process.env.IP.Axel) {
+		if (msg.author.id == process.env.MaxouCraft || msg.author.id == process.env.Teddy || msg.author.id == process.env.Axel) {
 			const deleteCount = parseInt(args[0], 10);
 			if (!deleteCount || deleteCount < 2 || deleteCount > 100)
 				return msg.reply("Merci de donner un nombre de 2 à 100 messages à supprimer");
@@ -182,8 +182,8 @@ client.on('message', async msg => {
 			}
 	}
 
-	if (!msg.content.startsWith(process.env.IP.prefix)) return;
-	if (commands.hasOwnProperty(msg.content.toLowerCase().slice(process.env.IP.prefix.length).split(' ')[0])) commands[msg.content.toLowerCase().slice(process.env.IP.prefix.length).split(' ')[0]](msg);
+	if (!msg.content.startsWith(process.env.prefix)) return;
+	if (commands.hasOwnProperty(msg.content.toLowerCase().slice(process.env.prefix.length).split(' ')[0])) commands[msg.content.toLowerCase().slice(process.env.prefix.length).split(' ')[0]](msg);
 });
 
-client.login(process.env.IP.token)
+client.login(process.env.token)
