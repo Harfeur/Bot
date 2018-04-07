@@ -140,11 +140,6 @@ const commands = {
 
 client.on('ready', () => {
 	console.log('Bot pret');
-	client.user.setActivity('sur le PC', {
-		type: 'PLAYING'
-	});
-	const testbot = 430951460558209035;
-	testbot.send("Bot démarré");
 });
 
 client.on('message', async msg => {
@@ -189,8 +184,7 @@ client.on('message', async msg => {
 });
 
 client.on('guildMemberAdd', member => {
-	const general = "374842067983007744";
-	general.send("Bienvenue à " + member.username + " !");
+
 });
 
 client.login(process.env.token)
