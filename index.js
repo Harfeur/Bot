@@ -186,4 +186,9 @@ client.on('message', async msg => {
 	if (commands.hasOwnProperty(msg.content.toLowerCase().slice(process.env.prefix.length).split(' ')[0])) commands[msg.content.toLowerCase().slice(process.env.prefix.length).split(' ')[0]](msg);
 });
 
+client.on('guildMemberAdd', member => {
+	const general = "374842067983007744";
+	channel.send("Bienvenue à " + member.username + " !");
+});
+
 client.login(process.env.token)
