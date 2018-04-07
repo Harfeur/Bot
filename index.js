@@ -23,6 +23,7 @@ const commands = {
 			msg.channel.send(`Lecture de: **${song.title}** comme demandé par: **${song.requester}**`);
 			dispatcher = msg.guild.voiceConnection.playStream(yt(song.url, { audioonly: true }), { passes : config.passes });
 			let collector = msg.channel.createCollector(m => m);
+			dispatcher.setVolume(0.2);
 			collector.on('message', m => {
 				if (m.content.startsWith(config.prefix + 'pause')) {
 					msg.channel.send('Mis en pause').then(() => {dispatcher.pause();});
@@ -85,10 +86,21 @@ const commands = {
 	},
 	'feuillederoute': (msg) => {
         msg.channel.send({
-            files: ['https://cdn.discordapp.com/attachments/374842067983007744/430448343458643968/Feuille_de_route.xlsx']
+            files: ['https://cdn.discordapp.com/attachments/399979689558409237/432233905236607036/Feuille_de_route.xlsx']
+		})
+		.catch(console.error);
+        msg.channel.send({
+            files: ['https://cdn.discordapp.com/attachments/399979689558409237/432233904905125888/Comment_faire_une_feuille_de_route.pdf']
         })
         .catch(console.error);
         msg.channel.send('Une fois terminée, vous devez poster la feuille de route dans le canal #feuilles-de-route et les comptables s\'en occuperont !');
+	},
+	'tb': (msg) => {
+		msg.channel.send({
+			files: ['https://cdn.discordapp.com/attachments/399979689558409237/432236647959101441/Tutoriel_TruckBook.pdf']
+		})
+		.catch(console.error);
+		msg.channel.send('http://trucksbook.eu/');
 	},
 	'accident': (msg) => {
         msg.channel.send('```Vous avez eu un accident ?! Vous allez bien ?!\n\nPour les constats, rendez-vous dans le canal #feuilles-de-route. Ensuite, vous devez mettre la date, l\'heure à laquelle c\'est arrivée et une description détaillée de ce qui est arrivé (photos conseillées).\n\n/!\\ MAIS ATTENTION /!\\\nPour repartir il faut respecter l\'article du règlement qui dit : \" En cas de dégâts importants, c’est à dire plus de 15 % vous devrez rejoindre le garage le plus proche et faire une demande d’assistance. Vous devrez également annuler votre mission actuelle. Après réception de cette demande, une démarche sera engagé pour faire revenir le camion à l’entreprise. Vous devrez alors rejoindre un des garages de l’entreprise, le plus proche. Vous ne devez en aucun cas continuer de rouler avec le camion abîmé et cela pour se rapprocher le plus à la réalité. \"```');
@@ -97,7 +109,7 @@ const commands = {
         msg.channel.send('```Ouille, ouille, ouille !\nAïe, aïe, aïe !\n\nSi vous faites une demande d\'assistance c\'est que le camion a 15% de dégats ou plus. \nPour cela, commencé par suivre les instructions de l\'article du règlement qui dit : \" En cas de dégâts importants, c’est à dire plus de 15 % vous devrez rejoindre le garage le plus proche et faire une demande d’assistance. Vous devrez également annuler votre mission actuelle.  Après réception de cette demande, une démarche sera engagé pour faire revenir le camion à l’entreprise. Vous devrez alors rejoindre un des garages de l’entreprise, le plus proche. Vous ne devez en aucun cas continuer de rouler avec le camion abîmé et cela pour se rapprocher le plus à la réalité.\"\n\nEnsuite prenez contact avec une personne hiérarchiquement supérieure à vous et elle vous dira la marche à suivre.```');
     },
 	'help': (msg) => {
-		let tosend = ['```xl', config.prefix + 'site : "Afficher le site de l\'entreprise"', config.prefix + 'recrutement : "Affixher le formulaire pour rejoindre l\'entreprise"', config.prefix + 'feuillederoute : "T�lécharger une feuille de route vierge"', config.prefix + 'accident : "Signaler un accident avec votre camion"', config.prefix + 'assistance : "Signaler une demande d\'appel de d�paneuse pour votre camion"', '', 'Commandes pour la musique, uniquement si le bot est sur le PC :'.toUpperCase(), config.prefix + 'join : "Envoyer le bot dans le canal audio actuel"',	config.prefix + 'add : "Ajouter un lien YouTube dans la queue"', config.prefix + 'queue : "Affiche la queue actuelle."', config.prefix + 'play : "Jouer la queue actuelle."', '', 'Ces commandes fonctionnent uniquement en lecture:'.toUpperCase(), config.prefix + 'pause : "Pause la musique"',	config.prefix + 'resume : "Résume la musique"', config.prefix + 'skip : "Saute la musique"', config.prefix + 'time : "Affiche la durée de la musique"',	'volume+ : "Augmente le volume de 5%"',	'volume- : "Diminue le volume de 2%"',	'```'];
+		let tosend = ['```xl', config.prefix + 'site : "Afficher le site de l\'entreprise"', config.prefix + 'recrutement : "Affixher le formulaire pour rejoindre l\'entreprise"', config.prefix + 'feuillederoute : "T�lécharger une feuille de route vierge"', config.prefix + 'tb : Tutoriel TrucksBook et site', config.prefix + 'accident : "Signaler un accident avec votre camion"', config.prefix + 'assistance : "Signaler une demande d\'appel de d�paneuse pour votre camion"', '', 'Commandes pour la musique, uniquement si le bot est sur le PC :'.toUpperCase(), config.prefix + 'join : "Envoyer le bot dans le canal audio actuel"',	config.prefix + 'add : "Ajouter un lien YouTube dans la queue"', config.prefix + 'queue : "Affiche la queue actuelle."', config.prefix + 'play : "Jouer la queue actuelle."', '', 'Ces commandes fonctionnent uniquement en lecture:'.toUpperCase(), config.prefix + 'pause : "Pause la musique"',	config.prefix + 'resume : "Résume la musique"', config.prefix + 'skip : "Saute la musique"', config.prefix + 'time : "Affiche la durée de la musique"',	'volume+ : "Augmente le volume de 5%"',	'volume- : "Diminue le volume de 2%"',	'```'];
 		msg.channel.send(tosend.join('\n'));
 	},
 	'prefix': (msg) => {
@@ -126,7 +138,7 @@ const commands = {
 		msg.channel.send('Ping !\nPong !');
 	},
 	'reboot': (msg) => {
-		if (msg.author.id == config.adminID) process.exit(); //Requires a node module like Forever to work.
+		if (msg.author.id == config.adminID) process.exit();
 	}
 };
 
@@ -138,6 +150,11 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
+
+/*	if (msg.channel === 375327331696508928) {
+		
+	}
+*/
 	if (msg.content.startsWith === 'VOTE') {
         msg.react(msg.guild.emojis.get('418752447557795842'))
             .catch(console.error);
