@@ -145,10 +145,13 @@ client.on('ready', () => {
 client.on('message', async msg => {
 	const args = msg.content.slice(process.env.prefix.length).trim().split(/ +/g);
 	const command = args.shift().toLowerCase();
-/*	if (msg.channel === 430951460558209035 || !message.author.bot) {
-
+	if (msg.channel === 430951460558209035 || !message.author.bot) {
+		joueurs = msg.channel.members.array();
+		joueurs.forEach(function(joueur) {
+			console.log(joueur);
+		});
 	}
-*/
+
 	if (msg.content.startsWith === 'VOTE') {
 		msg.react(msg.guild.emojis.get('418752447557795842'))
 			.catch(console.error);
