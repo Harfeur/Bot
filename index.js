@@ -254,9 +254,9 @@ client.on('guildMemberRemove', member => {
 });
 
 //LOGS
-
+/*
 client.on('guildBanAdd', guild, user => {
 	
 });
-
+*/
 client.login(process.env.token)
