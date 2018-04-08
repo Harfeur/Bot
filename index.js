@@ -184,7 +184,7 @@ client.on('message', async msg => {
 });
 
 client.on('guildMemberAdd', member => {
-	const channel = member.guild.channels.find('general', 'member-log');
+	const channel = member.guild.channels.find('general', 'general');
 	channel.send("Test réussi, *" + member.username + "* connecté");
 	console.log(channel);
 });
