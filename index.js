@@ -145,7 +145,7 @@ client.on('ready', () => {
 client.on('message', async msg => {
 	const args = msg.content.slice(process.env.prefix.length).trim().split(/ +/g);
 	const command = args.shift().toLowerCase();
-	if (msg.channel === 375327331696508928 || !msg.author.bot) {
+	if (msg.channel === 375327331696508928 && !msg.author.bot) {
 		joueurs = msg.channel.members.array();
 		joueurs.forEach(function (joueur) {
 			if (!joueur.user.bot) {
