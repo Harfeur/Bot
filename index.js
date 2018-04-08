@@ -133,6 +133,7 @@ const commands = {
 	},
 	'valide': (msg) => {
 		let joueur = msg.content.split(' ')[1];
+		console.log(joueur);
 		if (joueur === '') {
 			msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
 		} else {
