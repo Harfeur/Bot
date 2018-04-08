@@ -138,15 +138,15 @@ const commands = {
 		}
 		msg.channel.send(joueur + ' : validé par <' + message.author.id + '> !', {
 			embed: {
-			  thumbnail: {
-				   url: 'attachment://valide.png'
+				thumbnail: {
+					url: 'attachment://valide.png'
 				}
-			 },
-			 files: [{
+			},
+			files: [{
 				attachment: 'valide.png',
 				name: 'valide.png'
-			 }]
-		  });
+			}]
+		});
 		msg.delete(1000);
 	},
 	'refuse': (msg) => {
@@ -155,15 +155,15 @@ const commands = {
 		if (joueur == '') return msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
 		msg.channel.send(joueur + ' : refusé par <' + message.author.id + '> !', {
 			embed: {
-			  thumbnail: {
-				   url: 'attachment://refuse.png'
+				thumbnail: {
+					url: 'attachment://refuse.png'
 				}
-			 },
-			 files: [{
+			},
+			files: [{
 				attachment: 'refuse.png',
 				name: 'refuse.png'
-			 }]
-		  });
+			}]
+		});
 	},
 	'ping': (msg) => {
 		msg.channel.send('Ping !\nPong !\nÀ jour !');
@@ -217,15 +217,15 @@ client.on('message', async msg => {
 		msg.react(msg.guild.emojis.get('418752462263025665'))
 			.catch(console.error);
 	}
+	if (!msg.author.bot) {
+		if (msg.content.startsWith("Bonjour") || msg.content.startsWith("bonjour")) {
+			msg.reply("Bonjour !");
+		}
 
-	if (msg.content.startsWith("Bonjour") || msg.content.startsWith("bonjour")) {
-		msg.reply("Bonjour !");
+		if (msg.content.startsWith("Bonsoir") || msg.content.startsWith("bonsoir")) {
+			msg.reply("Bonsoir !");
+		}
 	}
-
-	if (msg.content.startsWith("Bonsoir") || msg.content.startsWith("bonsoir")) {
-		msg.reply("Bonsoir !");
-	}
-
 	if (command === 'purge') {
 		if (msg.author.id == process.env.MaxouCraft || msg.author.id == process.env.Teddy) {
 			const deleteCount = parseInt(args[0], 10);
