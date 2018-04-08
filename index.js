@@ -133,19 +133,25 @@ const commands = {
 	},
 	'valide': (msg) => {
 		let joueur = msg.content.split(' ')[1];
-		console.log(joueur);
-		if (joueur === 'undefined') {
-			msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
-		} else {
-			msg.channel.send('' + joueur + ' : validé par <@!' + message.author.id + '> !');
-		}
 		msg.delete(1000);
+		if (joueur == '') return msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
+		msg.channel.send(joueur + ' : refusé par <@!' + msg.author.id + '> !', {
+			embed: {
+				thumbnail: {
+					url: 'attachment://valide.png'
+				}
+			},
+			files: [{
+				attachment: '.\valide.png',
+				name: 'valide.png'
+			}]
+		});
 	},
 	'refuse': (msg) => {
 		let joueur = msg.content.split(' ')[1];
 		msg.delete(1000);
 		if (joueur == '') return msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
-		msg.channel.send(joueur + ' : refusé par <' + message.author.id + '> !', {
+		msg.channel.send(joueur + ' : refusé par <@!' + msg.author.id + '> !', {
 			embed: {
 				thumbnail: {
 					url: 'attachment://refuse.png'
