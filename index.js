@@ -157,7 +157,7 @@ client.on('message', async msg => {
 
 	if (msg.channel.name === "feuilles-de-route") {
 		fichier = msg.attachments.array();
-		console.log(ficheir);
+		console.log(fichier);
 		/*
 		joueurs = msg.channel.members.array();
 		joueurs.forEach(function (joueur) {
