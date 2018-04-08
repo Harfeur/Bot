@@ -145,7 +145,7 @@ const commands = {
 	'refuse': (msg) => {
 		let joueur = msg.content.split(' ')[1];
 		msg.delete(1000);
-		if (joueur == '') return msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
+		if (joueur == '') return msg.channel.send('Merci de mentionner la personne dont la facture est réfusée.');
 		msg.channel.send(joueur + ' : refusé par <@!' + msg.author.id + '> !', {
 			files: [{
 				attachment: 'refuse.png',
