@@ -185,7 +185,7 @@ client.on('message', async msg => {
 
 client.on('guildMemberAdd', member => {
 	const channel = member.guild.channels.find('name', 'general');
-	channel.send("Test réussi, *" + member.username + "* connecté");
+	channel.send("Bienvenue à <@" + member.user.id + "> sur le Discord !");
 	console.log(channel);
 });
 
