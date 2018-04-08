@@ -131,6 +131,38 @@ const commands = {
 		let tosend = ['```xl', process.env.prefix + 'site : "Afficher le site de l\'entreprise"', process.env.prefix + 'recrutement : "Affixher le formulaire pour rejoindre l\'entreprise"', process.env.prefix + 'feuillederoute : "Télécharger une feuille de route vierge"', process.env.prefix + 'entreprise : "Accéder au tbleur contenant les informations sur les feuilles de route, les camions, et les dépenses de l\'entreprise."', process.env.prefix + 'tb : "Tutoriel TrucksBook et site"', process.env.prefix + 'accident : "Signaler un accident avec votre camion"', process.env.prefix + 'assistance : "Signaler une demande d\'appel de dépaneuse pour votre camion"', '', 'Commandes pour la musique, uniquement si le bot est sur le PC :'.toUpperCase(), process.env.prefix + 'join : "Envoyer le bot dans le canal audio actuel"', process.env.prefix + 'add : "Ajouter un lien YouTube dans la queue"', process.env.prefix + 'queue : "Affiche la queue actuelle."', process.env.prefix + 'play : "Jouer la queue actuelle."', '', 'Ces commandes fonctionnent uniquement en lecture:'.toUpperCase(), process.env.prefix + 'pause : "Pause la musique"', process.env.prefix + 'resume : "Résume la musique"', process.env.prefix + 'skip : "Saute la musique"', process.env.prefix + 'temps : "Affiche la durée de la musique"', 'volume+ : "Augmente le volume de 5%"', 'volume- : "Diminue le volume de 5%"', '```'];
 		msg.channel.send(tosend.join('\n'));
 	},
+	'valide': (msg) => {
+		let joueur = msg.content.split(' ')[1];
+		msg.delete(1000);
+		if (joueur == '') return msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
+		msg.channel.send(joueur + ' : validé par <' + message.author.id + '> !', {
+			embed: {
+			  thumbnail: {
+				   url: 'attachment://valide.png'
+				}
+			 },
+			 files: [{
+				attachment: 'valide.png',
+				name: 'valide.png'
+			 }]
+		  });
+	},
+	'refuse': (msg) => {
+		let joueur = msg.content.split(' ')[1];
+		msg.delete(1000);
+		if (joueur == '') return msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
+		msg.channel.send(joueur + ' : refusé par <' + message.author.id + '> !', {
+			embed: {
+			  thumbnail: {
+				   url: 'attachment://refuse.png'
+				}
+			 },
+			 files: [{
+				attachment: 'refuse.png',
+				name: 'refuse.png'
+			 }]
+		  });
+	},
 	'ping': (msg) => {
 		msg.channel.send('Ping !\nPong !\nÀ jour !');
 	},
