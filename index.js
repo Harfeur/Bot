@@ -148,7 +148,7 @@ client.on('message', async msg => {
 	if (msg.channel === 430951460558209035 || !msg.author.bot) {
 		joueurs = msg.channel.members.array();
 		joueurs.forEach(function(joueur) {
-			console.log(joueur);
+			console.log(joueur.user.username);
 		});
 	}
 
