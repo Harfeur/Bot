@@ -133,8 +133,9 @@ const commands = {
 	},
 	'valide': (msg) => {
 		let joueur = msg.content.split(' ')[1];
-		msg.delete(1000);
-		if (joueur == '') return msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
+		if (joueur == '') {
+			return msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
+		}
 		msg.channel.send(joueur + ' : validé par <' + message.author.id + '> !', {
 			embed: {
 			  thumbnail: {
@@ -146,6 +147,7 @@ const commands = {
 				name: 'valide.png'
 			 }]
 		  });
+		msg.delete(1000);
 	},
 	'refuse': (msg) => {
 		let joueur = msg.content.split(' ')[1];
