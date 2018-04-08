@@ -140,8 +140,6 @@ const commands = {
 
 client.on('ready', () => {
 	console.log('Bot pret');
-	const channel = member.guild.channels.find('test-bot', 'member-log');
-	console.log(channel);
 });
 
 client.on('message', async msg => {
@@ -186,7 +184,8 @@ client.on('message', async msg => {
 });
 
 client.on('guildMemberAdd', member => {
-
+	const channel = member.guild.channels.find('test-bot', 'member-log');
+	console.log(channel);
 });
 
 client.login(process.env.token)
