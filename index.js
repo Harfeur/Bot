@@ -184,7 +184,7 @@ client.on('message', async msg => {
 });
 
 client.on('guildMemberAdd', member => {
-	const channel = member.guild.channels.find('test-bot', 'member-log');
+	const channel = member.guild.channels.find('general', 'member-log');
 	console.log(channel);
 });
 
