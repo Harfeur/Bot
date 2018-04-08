@@ -170,7 +170,7 @@ client.on('message', async msg => {
 	}
 
 	if (command === 'purge') {
-		if (msg.author.id == process.env.MaxouCraft || msg.author.id == process.env.Teddy || msg.author.id == process.env.Axel) {
+		if (msg.author.id == process.env.MaxouCraft || msg.author.id == process.env.Teddy) {
 			const deleteCount = parseInt(args[0], 10);
 			if (!deleteCount || deleteCount < 2 || deleteCount > 100)
 				return msg.reply("Merci de donner un nombre de 2 à 100 messages à supprimer");
