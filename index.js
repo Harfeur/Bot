@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const yt = require('ytdl-core');
+new Discord.RichEmbed();
 
 let queue = {};
 
@@ -108,7 +109,7 @@ const commands = {
 				files: ['https://cdn.discordapp.com/attachments/399979689558409237/432233904905125888/Comment_faire_une_feuille_de_route.pdf']
 			})
 			.catch(console.error);
-		msg.channel.send('Une fois terminée, vous devez poster la feuille de route dans le canal #feuilles-de-route et les comptables s\'en occuperont !');
+		msg.channel.send('Une fois terminée, vous devez poster la feuille de route dans le canal <#424673120532561922> et les comptables s\'en occuperont !');
 	},
 	'entreprise': (msg) => {
 		msg.channel.send('https://drive.google.com/open?id=17iusTta_JgnQXh35GMUxoYXOMRqXa7xuD_QoUjJRkIk');
@@ -176,10 +177,6 @@ client.on('message', async msg => {
 		})
 	}
 
-	if (msg.channel.name === "logs") {
-		console.log(msg.content);
-	}
-
 	if (msg.content.startsWith === 'VOTE') {
 		msg.react(msg.guild.emojis.get('418752447557795842'))
 			.catch(console.error);
@@ -222,6 +219,12 @@ client.on('guildMemberAdd', member => {
 client.on('guildMemberRemove', member => {
 	const channel = member.guild.channels.find('name', 'general');
 	channel.send("Aurevoir **" + member.user.username + "** ...");
+});
+
+//LOGS
+
+client.on('guildBanAdd', guild, user => {
+	
 });
 
 client.login(process.env.token)
