@@ -133,20 +133,11 @@ const commands = {
 	},
 	'valide': (msg) => {
 		let joueur = msg.content.split(' ')[1];
-		if (joueur == '') {
-			return msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
+		if (joueur === '') {
+			msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
+		} else {
+			msg.channel.send(joueur + ' : validé par <@' + message.author.id + '> !');
 		}
-		msg.channel.send(joueur + ' : validé par <' + message.author.id + '> !', {
-			embed: {
-				thumbnail: {
-					url: 'attachment://valide.png'
-				}
-			},
-			files: [{
-				attachment: 'valide.png',
-				name: 'valide.png'
-			}]
-		});
 		msg.delete(1000);
 	},
 	'refuse': (msg) => {
