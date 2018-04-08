@@ -157,18 +157,17 @@ client.on('message', async msg => {
 
 	if (msg.channel.name === "feuilles-de-route") {
 		fichier = msg.attachments.array();
-		console.log(fichier);
-		/*
-		joueurs = msg.channel.members.array();
-		joueurs.forEach(function (joueur) {
-			role = joueur.roles.array();
-			role.forEach(function (comptable) {
-				if(comptable.id = 384377920317161472) {
-					joueur.send("Nouvelle feuille de route à traiter (de **" + msg.author.username + "**.");
-				}
+		if (!fichier === []) {
+			joueurs = msg.channel.members.array();
+			joueurs.forEach(function (joueur) {
+				role = joueur.roles.array();
+				role.forEach(function (comptable) {
+					if (comptable.id = 384377920317161472) {
+						joueur.send("Nouvelle feuille de route à traiter (de **" + msg.author.username + "**.");
+					}
+				});
 			});
-		});
-		*/
+		}
 	}
 
 	if (msg.content.startsWith === 'VOTE') {
