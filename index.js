@@ -124,7 +124,7 @@ const commands = {
 		msg.channel.send('```Ouille, ouille, ouille !\nAïe, aïe, aïe !\n\nSi vous faites une demande d\'assistance c\'est que le camion a 15% de dégats ou plus. \nPour cela, commencé par suivre les instructions de l\'article du règlement qui dit : \" En cas de dégâts importants, c’est à dire plus de 15 % vous devrez rejoindre le garage le plus proche et faire une demande d’assistance. Vous devrez également annuler votre mission actuelle.  Après réception de cette demande, une démarche sera engagé pour faire revenir le camion à l’entreprise. Vous devrez alors rejoindre un des garages de l’entreprise, le plus proche. Vous ne devez en aucun cas continuer de rouler avec le camion abîmé et cela pour se rapprocher le plus à la réalité.\"\n\nEnsuite prenez contact avec une personne hiérarchiquement supérieure à vous et elle vous dira la marche à suivre.```');
 	},
 	'help': (msg) => {
-		let tosend = ['```xl', process.env.prefix + 'site : "Afficher le site de l\'entreprise"', process.env.prefix + 'recrutement : "Affixher le formulaire pour rejoindre l\'entreprise"', process.env.prefix + 'feuillederoute : "T�lécharger une feuille de route vierge"', process.env.prefix + 'tb : Tutoriel TrucksBook et site', process.env.prefix + 'accident : "Signaler un accident avec votre camion"', process.env.prefix + 'assistance : "Signaler une demande d\'appel de d�paneuse pour votre camion"', '', 'Commandes pour la musique, uniquement si le bot est sur le PC :'.toUpperCase(), process.env.prefix + 'join : "Envoyer le bot dans le canal audio actuel"', process.env.prefix + 'add : "Ajouter un lien YouTube dans la queue"', process.env.prefix + 'queue : "Affiche la queue actuelle."', process.env.prefix + 'play : "Jouer la queue actuelle."', '', 'Ces commandes fonctionnent uniquement en lecture:'.toUpperCase(), process.env.prefix + 'pause : "Pause la musique"', process.env.prefix + 'resume : "Résume la musique"', process.env.prefix + 'skip : "Saute la musique"', process.env.prefix + 'time : "Affiche la durée de la musique"', 'volume+ : "Augmente le volume de 5%"', 'volume- : "Diminue le volume de 2%"', '```'];
+		let tosend = ['```xl', process.env.prefix + 'site : "Afficher le site de l\'entreprise"', process.env.prefix + 'recrutement : "Affixher le formulaire pour rejoindre l\'entreprise"', process.env.prefix + 'feuillederoute : "Télécharger une feuille de route vierge"', process.env.prefix + 'tb : Tutoriel TrucksBook et site', process.env.prefix + 'accident : "Signaler un accident avec votre camion"', process.env.prefix + 'assistance : "Signaler une demande d\'appel de dépaneuse pour votre camion"', '', 'Commandes pour la musique, uniquement si le bot est sur le PC :'.toUpperCase(), process.env.prefix + 'join : "Envoyer le bot dans le canal audio actuel"', process.env.prefix + 'add : "Ajouter un lien YouTube dans la queue"', process.env.prefix + 'queue : "Affiche la queue actuelle."', process.env.prefix + 'play : "Jouer la queue actuelle."', '', 'Ces commandes fonctionnent uniquement en lecture:'.toUpperCase(), process.env.prefix + 'pause : "Pause la musique"', process.env.prefix + 'resume : "Résume la musique"', process.env.prefix + 'skip : "Saute la musique"', process.env.prefix + 'time : "Affiche la durée de la musique"', 'volume+ : "Augmente le volume de 5%"', 'volume- : "Diminue le volume de 5%"', '```'];
 		msg.channel.send(tosend.join('\n'));
 	},
 	'ping': (msg) => {
@@ -145,6 +145,7 @@ client.on('ready', () => {
 client.on('message', async msg => {
 	const args = msg.content.slice(process.env.prefix.length).trim().split(/ +/g);
 	const command = args.shift().toLowerCase();
+
 	if (msg.channel.name === "informations" && !msg.author.bot) {
 		joueurs = msg.channel.members.array();
 		joueurs.forEach(function (joueur) {
@@ -152,6 +153,22 @@ client.on('message', async msg => {
 				joueur.send("Nouveau message de l'entreprise par **" + msg.author.username + "** :\n" + msg.content);
 			}
 		});
+	}
+
+	if (msg.channel.name === "feuilles-de-route") {
+		fichier = msg.attachments.array();
+		console.log(ficheir);
+		/*
+		joueurs = msg.channel.members.array();
+		joueurs.forEach(function (joueur) {
+			role = joueur.roles.array();
+			role.forEach(function (comptable) {
+				if(comptable.id = 384377920317161472) {
+					joueur.send("Nouvelle feuille de route à traiter (de **" + msg.author.username + "**.");
+				}
+			});
+		});
+		*/
 	}
 
 	if (msg.content.startsWith === 'VOTE') {
