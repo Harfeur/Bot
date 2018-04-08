@@ -97,7 +97,7 @@ const commands = {
 		msg.channel.send('https://internationallogis60.wixsite.com/inter-logistic');
 	},
 	'recrutement': (msg) => {
-		msg.channel.send('```Pour être recruté, rien de plus simple. Il vous suffit de remplir le Google Forms et une réponse vous sera donnée dans les plus brefs délais.\n\n```https://goo.gl/forms/ncAFvOXsOkj8mRGr2```');
+		msg.channel.send('```Pour être recruté, rien de plus simple. Il vous suffit de remplir le Google Forms et une réponse vous sera donnée dans les plus brefs délais.\n\n```https://goo.gl/forms/ncAFvOXsOkj8mRGr2');
 	},
 	'feuillederoute': (msg) => {
 		msg.channel.send({
@@ -109,6 +109,9 @@ const commands = {
 			})
 			.catch(console.error);
 		msg.channel.send('Une fois terminée, vous devez poster la feuille de route dans le canal #feuilles-de-route et les comptables s\'en occuperont !');
+	},
+	'entreprise': (msg) => {
+		msg.channel.send('https://drive.google.com/open?id=17iusTta_JgnQXh35GMUxoYXOMRqXa7xuD_QoUjJRkIk');
 	},
 	'tb': (msg) => {
 		msg.channel.send({
@@ -157,6 +160,7 @@ client.on('message', async msg => {
 
 	if (msg.channel.name === "feuilles-de-route") {
 		fichier = msg.attachments.array();
+		console.log(fichier);
 		if (!fichier === []) {
 			joueurs = msg.channel.members.array();
 			joueurs.forEach(function (joueur) {
