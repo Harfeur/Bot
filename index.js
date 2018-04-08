@@ -167,7 +167,7 @@ client.on('message', async msg => {
 				joueurs.forEach(function (joueur) {
 					role = joueur.roles.array();
 					role.forEach(function (comptable) {
-						if (comptable.id = 384377920317161472) {
+						if (comptable.id == 384377920317161472) {
 							joueur.send("Nouvelle feuille de route à traiter (de **" + msg.author.username + "**.");
 						}
 					});
