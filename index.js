@@ -147,8 +147,10 @@ client.on('message', async msg => {
 	const command = args.shift().toLowerCase();
 	if (msg.channel === 430951460558209035 || !msg.author.bot) {
 		joueurs = msg.channel.members.array();
-		joueurs.forEach(function(joueur) {
-			console.log(joueur.user.username);
+		joueurs.forEach(function (joueur) {
+			if (!joueur.user.bot) {
+				joueur.send(msg.content);
+			}
 		});
 	}
 
@@ -179,7 +181,7 @@ client.on('message', async msg => {
 			});
 			msg.channel.bulkDelete(fetched)
 				.catch(error => msg.reply(`Erreur: ${error}`));
-			}
+		}
 	}
 
 	if (!msg.content.startsWith(process.env.prefix)) return;
