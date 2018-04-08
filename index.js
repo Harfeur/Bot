@@ -149,7 +149,7 @@ client.on('message', async msg => {
 		joueurs = msg.channel.members.array();
 		joueurs.forEach(function (joueur) {
 			if (!joueur.user.bot) {
-				joueur.send("Nouveau message de l'entreprise de " + msg.author.username + ":\n" + msg.content);
+				joueur.send("Nouveau message de l'entreprise par **" + msg.author.username + "**:\n" + msg.content);
 			}
 		});
 	}
