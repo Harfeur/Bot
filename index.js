@@ -159,53 +159,55 @@ client.on('message', async msg => {
 	}
 
 	if (msg.channel.name === "feuilles-de-route") {
-		fichier = msg.attachments.array();
-		console.log(fichier);
-		if (!fichier === []) {
-			joueurs = msg.channel.members.array();
-			joueurs.forEach(function (joueur) {
-				role = joueur.roles.array();
-				role.forEach(function (comptable) {
-					if (comptable.id = 384377920317161472) {
-						joueur.send("Nouvelle feuille de route à traiter (de **" + msg.author.username + "**.");
-					}
+		fichiers = msg.attachments.array();
+		console.log(fichiers);
+		fichiers.forEach(function (fichier) {
+			if (fichier.filename.endsWith('.xlsx') || fichier.filename.endsWith('.ods')) {
+				joueurs = msg.channel.members.array();
+				joueurs.forEach(function (joueur) {
+					role = joueur.roles.array();
+					role.forEach(function (comptable) {
+						if (comptable.id = 384377920317161472) {
+							joueur.send("Nouvelle feuille de route à traiter (de **" + msg.author.username + "**.");
+						}
+					});
 				});
-			});
-		}
+			}
+		})
 	}
 
-	if (msg.content.startsWith === 'VOTE') {
-		msg.react(msg.guild.emojis.get('418752447557795842'))
-			.catch(console.error);
-		msg.react(msg.guild.emojis.get('418752462263025665'))
-			.catch(console.error);
+if (msg.content.startsWith === 'VOTE') {
+	msg.react(msg.guild.emojis.get('418752447557795842'))
+		.catch(console.error);
+	msg.react(msg.guild.emojis.get('418752462263025665'))
+		.catch(console.error);
+}
+
+if (msg.content.startsWith("Bonjour") || msg.content.startsWith("bonjour")) {
+	msg.reply("Bonjour !");
+}
+
+if (msg.content.startsWith("Bonsoir") || msg.content.startsWith("bonsoir")) {
+	msg.reply("Bonsoir !");
+}
+
+if (command === 'purge') {
+	if (msg.author.id == process.env.MaxouCraft || msg.author.id == process.env.Teddy) {
+		const deleteCount = parseInt(args[0], 10);
+		if (!deleteCount || deleteCount < 2 || deleteCount > 100)
+			return msg.reply("Merci de donner un nombre de 2 à 100 messages à supprimer");
+
+		// So we get our messages, and delete them. Simple enough, right?
+		const fetched = await msg.channel.fetchMessages({
+			limit: deleteCount
+		});
+		msg.channel.bulkDelete(fetched)
+			.catch(error => msg.reply(`Erreur: ${error}`));
 	}
+}
 
-	if (msg.content.startsWith("Bonjour") || msg.content.startsWith("bonjour")) {
-		msg.reply("Bonjour !");
-	}
-
-	if (msg.content.startsWith("Bonsoir") || msg.content.startsWith("bonsoir")) {
-		msg.reply("Bonsoir !");
-	}
-
-	if (command === 'purge') {
-		if (msg.author.id == process.env.MaxouCraft || msg.author.id == process.env.Teddy) {
-			const deleteCount = parseInt(args[0], 10);
-			if (!deleteCount || deleteCount < 2 || deleteCount > 100)
-				return msg.reply("Merci de donner un nombre de 2 à 100 messages à supprimer");
-
-			// So we get our messages, and delete them. Simple enough, right?
-			const fetched = await msg.channel.fetchMessages({
-				limit: deleteCount
-			});
-			msg.channel.bulkDelete(fetched)
-				.catch(error => msg.reply(`Erreur: ${error}`));
-		}
-	}
-
-	if (!msg.content.startsWith(process.env.prefix)) return;
-	if (commands.hasOwnProperty(msg.content.toLowerCase().slice(process.env.prefix.length).split(' ')[0])) commands[msg.content.toLowerCase().slice(process.env.prefix.length).split(' ')[0]](msg);
+if (!msg.content.startsWith(process.env.prefix)) return;
+if (commands.hasOwnProperty(msg.content.toLowerCase().slice(process.env.prefix.length).split(' ')[0])) commands[msg.content.toLowerCase().slice(process.env.prefix.length).split(' ')[0]](msg);
 });
 
 client.on('guildMemberAdd', member => {
