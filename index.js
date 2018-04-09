@@ -191,7 +191,7 @@ client.on('message', async msg => {
 					role = joueur.roles.array();
 					role.forEach(function (comptable) {
 						if (comptable.id == 384377920317161472) {
-							joueur.send("Nouvelle feuille de route à traiter (de **" + msg.author.username + "**).");
+							joueur.send("Nouvelle feuille de route à traiter (de **" + msg.author.username + "**). <#424673120532561922>");
 						}
 					});
 				});
@@ -213,12 +213,16 @@ client.on('message', async msg => {
 		if (msg.content.startsWith("Bonsoir") || msg.content.startsWith("bonsoir")) {
 			msg.reply("Bonsoir !");
 		}
+
+		if (msg.content.startsWith("Bonne nuit") || msg.content.startsWith("bonne nuit")) {
+			msg.reply("Bonne nuit !");
+		}
 	}
 	if (command === 'purge') {
 		if (msg.author.id == process.env.MaxouCraft || msg.author.id == process.env.Teddy) {
 			const deleteCount = parseInt(args[0], 10);
 			if (!deleteCount || deleteCount < 2 || deleteCount > 100)
-				return msg.reply("Merci de donner un nombre de 2 à 100 messages à supprimer");
+				return msg.reply("Merci de donner un nombre de 2 à 100 messages à supprimer.");
 
 			// So we get our messages, and delete them. Simple enough, right?
 			const fetched = await msg.channel.fetchMessages({
@@ -249,4 +253,4 @@ client.on('guildBanAdd', guild, user => {
 	
 });
 */
-client.login(process.env.token)
+client.login(process.env.token);
