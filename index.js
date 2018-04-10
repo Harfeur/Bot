@@ -209,14 +209,14 @@ client.on('message', async msg => {
 	}
 
 	if (msg.channel.name === "bienvenue") {
-		if (msg.content.startsWith(Oui) || msg.content.startsWith(oui)) {
+		if (msg.content.startsWith('Oui') || msg.content.startsWith('oui')) {
 			msg.member.send('```Pour être recruté, rien de plus simple. Il vous suffit de remplir le Google Forms et une réponse vous sera donnée dans les plus brefs délais.```\n\nhttps://goo.gl/forms/ncAFvOXsOkj8mRGr2')
 			msg.member.setRoles(['426780618647404555'])
 			.catch(console.error);
 			const channel = member.guild.channels.find('name', 'general');
 			channel.send("Bienvenue à <@!" + member.user.id + "> sur le Discord !");
 		}
-		if (msg.content.startsWith(Non) || msg.content.startsWith(non)) {
+		if (msg.content.startsWith('Non') || msg.content.startsWith('non')) {
 			msg.member.setRoles(['426780618647404555'])
 			.catch(console.error);
 			const channel = member.guild.channels.find('name', 'general');
