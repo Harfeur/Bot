@@ -134,7 +134,7 @@ const commands = {
 	'valide': (msg) => {
 		let joueur = msg.content.split(' ')[1];
 		msg.delete(1000);
-		if (joueur == 'undrefined') return msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
+		if (joueur == undefined) return msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
 		msg.channel.send(joueur + ' : validé par <@!' + msg.author.id + '> !', {
 			files: [{
 				attachment: 'valide.png',
