@@ -264,7 +264,7 @@ client.on('message', async msg => {
 
 client.on('guildMemberAdd', member => {
 	const channel = member.guild.channels.find('name', 'bienvenue');
-	channel.send("Bienvenue <@!" + member.user.id + ">sur le serveur Discord de **International Logistique** ! Afin de rejoindre le serveur, merci de me donner votre prénom en faisant **.prenom** suivi de votre prénom ! \n ``` Exemple : .prenom Léo ```");
+	channel.send("Bienvenue <@!" + member.user.id + "> sur le serveur Discord de **International Logistique** ! Afin de rejoindre le serveur, merci de me donner votre prénom en faisant **.prenom** suivi de votre prénom ! \n ``` Exemple : .prenom Léo ```");
 });
 
 client.on('guildMemberRemove', member => {
