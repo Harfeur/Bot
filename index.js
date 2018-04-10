@@ -98,7 +98,7 @@ const commands = {
 		msg.channel.send('https://internationallogis60.wixsite.com/inter-logistic');
 	},
 	'recrutement': (msg) => {
-		msg.channel.send('```Pour être recruté, rien de plus simple. Il vous suffit de remplir le Google Forms et une réponse vous sera donnée dans les plus brefs délais.\n\n```https://goo.gl/forms/ncAFvOXsOkj8mRGr2');
+		msg.channel.send('```Pour être recruté, rien de plus simple. Il vous suffit de remplir le Google Forms et une réponse vous sera donnée dans les plus brefs délais.```\n\nhttps://goo.gl/forms/ncAFvOXsOkj8mRGr2');
 	},
 	'feuillederoute': (msg) => {
 		msg.channel.send({
@@ -153,6 +153,15 @@ const commands = {
 			}]
 		});
 	},
+	'prenom': (msg) => {
+		if (msg.channel.name === "bienvenue") {
+			let prenom = msg.content.split(' ')[1];
+			if (prenom == undefined || prenom == ' ') return msg.channel.send("Vous n'avez pas de prénom ?");
+			msg.member.setNickname(prenom + ' (' + msg.author.username + ')')
+			.catch(console.error);
+			msg.channel.send('Merci beaucoup ' + prenom + ' ! Une dernière chose, souhaite-tu rejoindre l\'entreprise ? Réponds par oui ou non :)');
+		}
+	},
 	'ping': (msg) => {
 		msg.channel.send('Ping !\nPong !\nÀ jour !');
 	},
@@ -199,6 +208,22 @@ client.on('message', async msg => {
 		})
 	}
 
+	if (msg.channel.name === "bienvenue") {
+		if (msg.content.startsWith(Oui) || msg.content.startsWith(oui)) {
+			msg.member.send('```Pour être recruté, rien de plus simple. Il vous suffit de remplir le Google Forms et une réponse vous sera donnée dans les plus brefs délais.```\n\nhttps://goo.gl/forms/ncAFvOXsOkj8mRGr2')
+			msg.member.setRoles(['426780618647404555'])
+			.catch(console.error);
+			const channel = member.guild.channels.find('name', 'general');
+			channel.send("Bienvenue à <@!" + member.user.id + "> sur le Discord !");
+		}
+		if (msg.content.startsWith(Non) || msg.content.startsWith(non)) {
+			msg.member.setRoles(['426780618647404555'])
+			.catch(console.error);
+			const channel = member.guild.channels.find('name', 'general');
+			channel.send("Bienvenue à <@!" + member.user.id + "> sur le Discord !");
+		}
+	}
+
 	if (msg.content.startsWith === 'VOTE') {
 		msg.react(msg.guild.emojis.get('418752447557795842'))
 			.catch(console.error);
@@ -238,8 +263,8 @@ client.on('message', async msg => {
 });
 
 client.on('guildMemberAdd', member => {
-	const channel = member.guild.channels.find('name', 'general');
-	channel.send("Bienvenue à <@" + member.user.id + "> sur le Discord !");
+	const channel = member.guild.channels.find('name', 'bienvenue');
+	channel.send("Bienvenue <@!" + member.user.id + "sur le serveur Discord de **International Logistique** ! Afin de rejoindre le serveur, merci de me donner votre prénom en faisant **.prenom** suivi de votre prénom ! \n ``` Exemple : .prenom Léo ```");
 });
 
 client.on('guildMemberRemove', member => {
