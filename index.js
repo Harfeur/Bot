@@ -134,7 +134,7 @@ const commands = {
 	'valide': (msg) => {
 		let joueur = msg.content.split(' ')[1];
 		msg.delete(1000);
-		if (joueur == '') return msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
+		if (joueur == 'undrefined') return msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
 		msg.channel.send(joueur + ' : validé par <@!' + msg.author.id + '> !', {
 			files: [{
 				attachment: 'valide.png',
@@ -145,7 +145,7 @@ const commands = {
 	'refuse': (msg) => {
 		let joueur = msg.content.split(' ')[1];
 		msg.delete(1000);
-		if (joueur == '') return msg.channel.send('Merci de mentionner la personne dont la facture est réfusée.');
+		if (joueur == undefined) return msg.channel.send('Merci de mentionner la personne dont la facture est réfusée.');
 		msg.channel.send(joueur + ' : refusé par <@!' + msg.author.id + '> !', {
 			files: [{
 				attachment: 'refuse.png',
@@ -248,8 +248,6 @@ client.on('message', async msg => {
 			const deleteCount = parseInt(args[0], 10);
 			if (!deleteCount || deleteCount < 2 || deleteCount > 100)
 				return msg.reply("Merci de donner un nombre de 2 à 100 messages à supprimer.");
-
-			// So we get our messages, and delete them. Simple enough, right?
 			const fetched = await msg.channel.fetchMessages({
 				limit: deleteCount
 			});
