@@ -137,7 +137,7 @@ const commands = {
 		if (joueur == undefined) return msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
 		msg.channel.send(joueur + ' : validé par <@!' + msg.author.id + '> !', {
 			files: [{
-				attachment: 'valide.png',
+				attachment: '.\\assets\\valide.png',
 				name: 'valide.png'
 			}]
 		});
@@ -148,7 +148,7 @@ const commands = {
 		if (joueur == undefined) return msg.channel.send('Merci de mentionner la personne dont la facture est refusée.');
 		msg.channel.send(joueur + ' : refusé par <@!' + msg.author.id + '> !', {
 			files: [{
-				attachment: 'refuse.png',
+				attachment: '.\\assets\\refuse.png',
 				name: 'refuse.png'
 			}]
 		});
@@ -157,8 +157,10 @@ const commands = {
 		if (msg.channel.name === "bienvenue") {
 			let prenom = msg.content.split(' ')[1];
 			if (prenom == undefined || prenom == ' ') return msg.channel.send("Vous n'avez pas de prénom ?");
-			msg.member.setNickname(prenom + ' (' + msg.author.username + ')')
-			.catch(console.error);
+			if (prenom != msg.author.username) {
+				msg.member.setNickname(prenom + ' (' + msg.author.username + ')')
+				.catch(console.error);
+			}
 			msg.channel.send('Merci beaucoup ' + prenom + ' ! Une dernière chose, souhaites-tu rejoindre l\'entreprise ? Réponds par oui ou non :)');
 		}
 	},
@@ -230,6 +232,7 @@ client.on('message', async msg => {
 		msg.react(msg.guild.emojis.get('418752462263025665'))
 			.catch(console.error);
 	}
+	
 	if (!msg.author.bot) {
 		if (msg.content.startsWith("Bonjour") || msg.content.startsWith("bonjour")) {
 			msg.reply("Bonjour !");
@@ -243,6 +246,7 @@ client.on('message', async msg => {
 			msg.reply("Bonne nuit !");
 		}
 	}
+	
 	if (command === 'purge') {
 		if (msg.author.id == process.env.MaxouCraft || msg.author.id == process.env.Teddy) {
 			const deleteCount = parseInt(args[0], 10);
