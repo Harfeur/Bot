@@ -94,6 +94,9 @@ const commands = {
 		});
 		msg.channel.send(`Queue de musiques : Actuellement **${tosend.length}** musiques dans la queue. ${(tosend.length > 15 ? '*[Sueles les 15 prochaines sont affichées]*' : '')}\n\`\`\`${tosend.slice(0,15).join('\n')}\`\`\``);
 	},
+	'invite': (msg => {
+		msg.channel.send('Invitez vos amis : https://discord.gg/rjk3DWm ! L\'invitation est invalide pour vous, c\'est normal !');
+	}),
 	'site': (msg) => {
 		msg.channel.send('https://internationallogis60.wixsite.com/inter-logistic');
 	},
