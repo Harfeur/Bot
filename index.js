@@ -98,7 +98,7 @@ const commands = {
 		msg.channel.send('https://internationallogis60.wixsite.com/inter-logistic');
 	},
 	'recrutement': (msg) => {
-		msg.channel.send('```Pour être recruté, rien de plus simple. Il vous suffit de remplir le Google Forms et une réponse vous sera donnée dans les plus brefs délais.```\n\nhttps://goo.gl/forms/ncAFvOXsOkj8mRGr2');
+		msg.channel.send('```Pour être recruté, rien de plus simple. Il vous suffit de remplir le Google Forms et une réponse vous sera donnée dans les plus brefs délais.``` \nhttps://goo.gl/forms/ncAFvOXsOkj8mRGr2');
 	},
 	'feuillederoute': (msg) => {
 		msg.channel.send({
