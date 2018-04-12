@@ -132,29 +132,30 @@ const commands = {
 	},
 	'help': (msg) => {
 		let tosend = ['```xl',
-		process.env.prefix + 'site : "Afficher le site de l\'entreprise"',
-		process.env.prefix + 'recrutement : "Affixher le formulaire pour rejoindre l\'entreprise"',
-		process.env.prefix + 'feuillederoute : "Télécharger une feuille de route vierge"',
-		process.env.prefix + 'entreprise : "Accéder au tableur contenant les informations sur les feuilles de route, les camions, et les dépenses de l\'entreprise."',
-		process.env.prefix + 'invite : "Affiche un lien permanent pour inviter quelqu\'un"',
-		process.env.prefix + 'tb : "Tutoriel TrucksBook et site"',
-		process.env.prefix + 'accident : "Signaler un accident avec votre camion"',
-		process.env.prefix + 'assistance : "Signaler une demande d\'appel de dépaneuse pour votre camion"',
-		'',
-		'Commandes pour la musique :'.toUpperCase(),
-		process.env.prefix + 'join : "Envoyer le bot dans le canal audio actuel"',
-		process.env.prefix + 'add : "Ajouter un lien YouTube dans la queue"',
-		process.env.prefix + 'queue : "Affiche la queue actuelle."',
-		process.env.prefix + 'play : "Jouer la queue actuelle."',
-		'',
-		'Ces commandes fonctionnent uniquement en lecture:'.toUpperCase(),
-		process.env.prefix + 'pause : "Pause la musique"',
-		process.env.prefix + 'resume : "Résume la musique"',
-		process.env.prefix + 'skip : "Saute la musique"',
-		process.env.prefix + 'temps : "Affiche la durée de la musique"',
-		'volume+ : "Augmente le volume de 5%"',
-		'volume- : "Diminue le volume de 5%"',
-		'```'];
+			process.env.prefix + 'site : "Afficher le site de l\'entreprise"',
+			process.env.prefix + 'recrutement : "Affixher le formulaire pour rejoindre l\'entreprise"',
+			process.env.prefix + 'feuillederoute : "Télécharger une feuille de route vierge"',
+			process.env.prefix + 'entreprise : "Accéder au tableur contenant les informations sur les feuilles de route, les camions, et les dépenses de l\'entreprise."',
+			process.env.prefix + 'invite : "Affiche un lien permanent pour inviter quelqu\'un"',
+			process.env.prefix + 'tb : "Tutoriel TrucksBook et site"',
+			process.env.prefix + 'accident : "Signaler un accident avec votre camion"',
+			process.env.prefix + 'assistance : "Signaler une demande d\'appel de dépaneuse pour votre camion"',
+			'',
+			'Commandes pour la musique :'.toUpperCase(),
+			process.env.prefix + 'join : "Envoyer le bot dans le canal audio actuel"',
+			process.env.prefix + 'add : "Ajouter un lien YouTube dans la queue"',
+			process.env.prefix + 'queue : "Affiche la queue actuelle."',
+			process.env.prefix + 'play : "Jouer la queue actuelle."',
+			'',
+			'Ces commandes fonctionnent uniquement en lecture:'.toUpperCase(),
+			process.env.prefix + 'pause : "Pause la musique"',
+			process.env.prefix + 'resume : "Résume la musique"',
+			process.env.prefix + 'skip : "Saute la musique"',
+			process.env.prefix + 'temps : "Affiche la durée de la musique"',
+			'volume+ : "Augmente le volume de 5%"',
+			'volume- : "Diminue le volume de 5%"',
+			'```'
+		];
 		msg.channel.send(tosend.join('\n'));
 	},
 	'valide': (msg) => {
@@ -185,7 +186,7 @@ const commands = {
 			if (prenom == undefined || prenom == ' ') return msg.channel.send("Vous n'avez pas de prénom ?");
 			if (prenom != msg.author.username) {
 				msg.member.setNickname(prenom + ' (' + msg.author.username + ')')
-				.catch(console.error);
+					.catch(console.error);
 			}
 			msg.channel.send('Merci beaucoup ' + prenom + ' ! Une dernière chose, souhaites-tu rejoindre l\'entreprise ? Réponds par oui ou non :)');
 		}
@@ -240,13 +241,13 @@ client.on('message', async msg => {
 		if (msg.content.startsWith('Oui') || msg.content.startsWith('oui')) {
 			msg.member.send('```Pour être recruté, rien de plus simple. Il vous suffit de remplir le Google Forms et une réponse vous sera donnée dans les plus brefs délais.```\n\nhttps://goo.gl/forms/ncAFvOXsOkj8mRGr2')
 			msg.member.setRoles(['426780618647404555'])
-			.catch(console.error);
+				.catch(console.error);
 			const channel = msg.guild.channels.find('name', 'general');
 			channel.send("Bienvenue à <@!" + msg.author.id + "> sur le Discord !");
 		}
 		if (msg.content.startsWith('Non') || msg.content.startsWith('non')) {
 			msg.member.setRoles(['426780618647404555'])
-			.catch(console.error);
+				.catch(console.error);
 			const channel = msg.guild.channels.find('name', 'general');
 			channel.send("Bienvenue à <@!" + msg.author.id + "> sur le Discord !");
 		}
@@ -258,7 +259,7 @@ client.on('message', async msg => {
 		msg.react(msg.guild.emojis.get('418752462263025665'))
 			.catch(console.error);
 	}
-	
+
 	if (!msg.author.bot) {
 		if (msg.content.startsWith("Bonjour") || msg.content.startsWith("bonjour")) {
 			msg.reply("Bonjour !");
@@ -272,7 +273,7 @@ client.on('message', async msg => {
 			msg.reply("Bonne nuit !");
 		}
 	}
-	
+
 	if (command === 'purge') {
 		if (msg.author.id == process.env.MaxouCraft || msg.author.id == process.env.Teddy) {
 			const deleteCount = parseInt(args[0], 10);
@@ -302,15 +303,45 @@ client.on('guildMemberRemove', member => {
 
 
 client.on('messageReactionAdd', (messageReaction, user) => {
-    if ((messageReaction.message.channel.name === "informations") && (messageReaction.emoji.name === "oui") && (messageReaction.count >= 2)) {
-	 reunion = messageReaction.message.guild.channels.aray();
-	 reunion.forEach(function(channel) { 
-		 if (channel.name.startsWith('Réunion du')) {  
-			 channel.edit({ userLimit: (messageReaction.count - 1)})    
-				.catch(console.error);             }          });     }
+	console.log(messageReaction.channel.name);
+	console.log(messageReaction.emoji.name);
+	console.log(messageReaction.count);
+	if ((messageReaction.message.channel.name === "informations") && (messageReaction.message.content.startsWith('Réunion')) && (messageReaction.emoji.name === "oui") && (messageReaction.count >= 2)) {
+		reunion = messageReaction.message.guild.channels.aray();
+		reunion.forEach(function (channel) {
+			console.log(channel.name);
+			if (channel.name.startsWith('Réunion du')) {
+				channel.edit({
+						userLimit: (messageReaction.count - 1)
+					})
+					.catch(console.error);
+			}
+		});
+	}
+	console.log(messageReaction.channel.name);
+	console.log(messageReaction.emoji.name);
+	console.log(messageReaction.count);
 }); 
 
-client.on('messageReactionRemove', (messageReaction, user) => {     if ((messageReaction.message.channel.name === "informations") && (messageReaction.emoji.name === "oui") && (messageReaction.count >= 2)) {         reunion = messageReaction.message.guild.channels.aray();         reunion.forEach(function(channel) {             if (channel.name.startsWith('Réunion du')) {                 channel.edit({ userLimit: (messageReaction.count - 1)})                 .catch(console.error);             }          });     }
+client.on('messageReactionRemove', (messageReaction, user) => {
+	console.log(messageReaction.channel.name);
+	console.log(messageReaction.emoji.name);
+	console.log(messageReaction.count);
+	if ((messageReaction.message.channel.name === "informations") && (messageReaction.message.content.startsWith('Réunion')) && (messageReaction.emoji.name === "oui") && (messageReaction.count >= 2)) {
+		reunion = messageReaction.message.guild.channels.aray();
+		reunion.forEach(function (channel) {
+			console.log(channel.name);
+			if (channel.name.startsWith('Réunion du')) {
+				channel.edit({
+						userLimit: (messageReaction.count - 1)
+					})
+					.catch(console.error);
+			}
+		});
+	}
+	console.log(messageReaction.channel.name);
+	console.log(messageReaction.emoji.name);
+	console.log(messageReaction.count);
 });
 
 
