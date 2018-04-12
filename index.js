@@ -303,7 +303,7 @@ client.on('guildMemberRemove', member => {
 
 
 client.on('messageReactionAdd', (messageReaction, user) => {
-	console.log(messageReaction.channel.name);
+	console.log(messageReaction.message.channel.name);
 	console.log(messageReaction.emoji.name);
 	console.log(messageReaction.count);
 	if ((messageReaction.message.channel.name === "informations") && (messageReaction.message.content.startsWith('Réunion')) && (messageReaction.emoji.name === "oui") && (messageReaction.count >= 2)) {
@@ -324,7 +324,7 @@ client.on('messageReactionAdd', (messageReaction, user) => {
 }); 
 
 client.on('messageReactionRemove', (messageReaction, user) => {
-	console.log(messageReaction.channel.name);
+	console.log(messageReaction.message.channel.name);
 	console.log(messageReaction.emoji.name);
 	console.log(messageReaction.count);
 	if ((messageReaction.message.channel.name === "informations") && (messageReaction.message.content.startsWith('Réunion')) && (messageReaction.emoji.name === "oui") && (messageReaction.count >= 2)) {
