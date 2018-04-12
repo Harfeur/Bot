@@ -209,7 +209,7 @@ client.on('ready', () => {
 client.on('message', async msg => {
 	const args = msg.content.slice(process.env.prefix.length).trim().split(/ +/g);
 	const command = args.shift().toLowerCase();
-
+/*
 	const reunion = 430591291362115584;
 	votes = reunion.reactions.array();
 	votes.forEach(function (vote) {
@@ -219,7 +219,7 @@ client.on('message', async msg => {
 			.catch(console.error);
 		}
 	});
-
+*/
 	if (msg.channel.name === "informations" && !msg.author.bot) {
 		joueurs = msg.channel.members.array();
 		joueurs.forEach(function (joueur) {
