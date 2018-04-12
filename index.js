@@ -318,9 +318,6 @@ client.on('messageReactionAdd', (messageReaction, user) => {
 			}
 		});
 	}
-	console.log(messageReaction.channel.name);
-	console.log(messageReaction.emoji.name);
-	console.log(messageReaction.count);
 }); 
 
 client.on('messageReactionRemove', (messageReaction, user) => {
@@ -340,9 +337,6 @@ client.on('messageReactionRemove', (messageReaction, user) => {
 			}
 		});
 	}
-	console.log(messageReaction.channel.name);
-	console.log(messageReaction.emoji.name);
-	console.log(messageReaction.count);
 });
 
 
