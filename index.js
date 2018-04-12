@@ -164,7 +164,7 @@ const commands = {
 		if (joueur == undefined) return msg.channel.send('Merci de mentionner la personne dont la facture est validée.');
 		msg.channel.send(joueur + ' : validé par <@!' + msg.author.id + '> !', {
 			files: [{
-				attachment: '/assets/valide.png',
+				attachment: 'assets/valide.png',
 				name: 'valide.png'
 			}]
 		});
@@ -175,7 +175,7 @@ const commands = {
 		if (joueur == undefined) return msg.channel.send('Merci de mentionner la personne dont la facture est refusée.');
 		msg.channel.send(joueur + ' : refusé par <@!' + msg.author.id + '> !', {
 			files: [{
-				attachment: '/assets/refuse.png',
+				attachment: 'assets/refuse.png',
 				name: 'refuse.png'
 			}]
 		});
