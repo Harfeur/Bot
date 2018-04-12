@@ -213,7 +213,7 @@ client.on('message', async msg => {
 	const reunion = 430591291362115584;
 	votes = reunion.reactions.array();
 	votes.forEach(function (vote) {
-		if ((vote.emoji.id === 418752447557795842) && (vote.emoji.count > 1)) {
+		if ((vote.emoji.id === 418752447557795842) && (vote.count > 1)) {
 			const audioreunion = 374891639313006592;
 			audioreunion.setUserLimit((vote.emoji.count - 1))
 			.catch(console.error);
