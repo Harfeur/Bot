@@ -335,6 +335,7 @@ client.on('messageReactionRemove', (messageReaction, user) => {
 				channel.edit({
 						userLimit: (messageReaction.count - 1)
 					})
+					.then(console.log('Modifié !'))
 					.catch(console.error);
 			}
 		});
