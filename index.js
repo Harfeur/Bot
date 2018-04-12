@@ -211,6 +211,14 @@ client.on('message', async msg => {
 	const command = args.shift().toLowerCase();
 
 	const reunion = 430591291362115584;
+	votes = reunion.reactions.array();
+	vote.forEach(function (vote) {
+		if ((vote.emoji.id === 418752447557795842) && (vote.emoji.count > 1)) {
+			const audioreunion = 374891639313006592;
+			audioreunion.setUserLimit((vote.emoji.count - 1))
+			.catch(console.error);
+		}
+	});
 
 	if (msg.channel.name === "informations" && !msg.author.bot) {
 		joueurs = msg.channel.members.array();
@@ -301,44 +309,6 @@ client.on('guildMemberAdd', member => {
 client.on('guildMemberRemove', member => {
 	const channel = member.guild.channels.find('name', 'general');
 	channel.send("Aurevoir **" + member.user.username + "** ...");
-});
-
-
-client.on('messageReactionAdd', (messageReaction, user) => {
-	console.log(messageReaction.message.channel.name);
-	console.log(messageReaction.emoji.name);
-	console.log(messageReaction.count);
-	if ((messageReaction.message.channel.name === "informations") && (messageReaction.message.content.startsWith('Réunion')) && (messageReaction.emoji.name === "oui") && (messageReaction.count >= 2)) {
-		reunion = messageReaction.message.guild.channels.aray();
-		reunion.forEach(function (channel) {
-			console.log(channel.name);
-			if (channel.name.startsWith('Réunion du')) {
-				channel.edit({
-						userLimit: (messageReaction.count - 1)
-					})
-					.catch(console.error);
-			}
-		});
-	}
-}); 
-
-client.on('messageReactionRemove', (messageReaction, user) => {
-	console.log(messageReaction.message.channel.name);
-	console.log(messageReaction.emoji.name);
-	console.log(messageReaction.count);
-	if ((messageReaction.message.channel.name === "informations") && (messageReaction.message.content.startsWith('Réunion')) && (messageReaction.emoji.name === "oui") && (messageReaction.count >= 2)) {
-		reunion = messageReaction.message.guild.channels.aray();
-		reunion.forEach(function (channel) {
-			console.log(channel.name);
-			if (channel.name.startsWith('Réunion du')) {
-				channel.edit({
-						userLimit: (messageReaction.count - 1)
-					})
-					.then(console.log('Modifié !'))
-					.catch(console.error);
-			}
-		});
-	}
 });
 
 
