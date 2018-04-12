@@ -300,6 +300,15 @@ client.on('guildMemberRemove', member => {
 	channel.send("Aurevoir **" + member.user.username + "** ...");
 });
 
+
+client.on('messageReactionAdd', (messageReaction, user) {
+    if ((messageReaction.message.channel.name === "informations") && (messageReaction.emoji.name === "oui") && (messageReaction.count >= 2)) {         reunion = messageReaction.message.guild.channels.aray();         reunion.forEach(function(channel) {             if (channel.name.startsWith('Réunion du')) {                 channel.edit({ userLimit: (messageReaction.count - 1)})                 .catch(console.error);             }          });     }
+}); 
+
+client.on('messageReactionRemove', (messageReaction, user) {     if ((messageReaction.message.channel.name === "informations") && (messageReaction.emoji.name === "oui") && (messageReaction.count >= 2)) {         reunion = messageReaction.message.guild.channels.aray();         reunion.forEach(function(channel) {             if (channel.name.startsWith('Réunion du')) {                 channel.edit({ userLimit: (messageReaction.count - 1)})                 .catch(console.error);             }          });     }
+});
+
+
 //LOGS
 /*
 client.on('guildBanAdd', guild, user => {
