@@ -263,7 +263,7 @@ client.on('message', async msg => {
 		}
 	}
 
-	if (msg.content.startsWith === 'VOTE') {
+	if (msg.content.startsWith.toUpperCase() === 'VOTE') {
 		msg.react(msg.guild.emojis.get('418752447557795842'))
 			.catch(console.error);
 		msg.react(msg.guild.emojis.get('418752462263025665'))
