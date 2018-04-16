@@ -199,6 +199,38 @@ const commands = {
 			msg.channel.send("Redémarrage...");
 			process.exit();
 		}
+	},
+	'test': (msg) => {
+		msg.channel.send({
+			embed: {
+				color: 3447003,
+				author: {
+					name: client.user.username,
+					icon_url: client.user.avatarURL
+				},
+				title: "This is an embed",
+				url: "http://google.com",
+				description: "This is a test embed to showcase what they look like and what they can do.",
+				fields: [{
+						name: "Fields",
+						value: "They can have different fields with small headlines."
+					},
+					{
+						name: "Masked links",
+						value: "You can put [masked links](http://google.com) inside of rich embeds."
+					},
+					{
+						name: "Markdown",
+						value: "You can put all the *usual* **__Markdown__** inside of them."
+					}
+				],
+				timestamp: new Date(),
+				footer: {
+					icon_url: client.user.avatarURL,
+					text: "© Example"
+				}
+			}
+		});
 	}
 };
 
@@ -209,17 +241,17 @@ client.on('ready', () => {
 client.on('message', async msg => {
 	const args = msg.content.slice(process.env.prefix.length).trim().split(/ +/g);
 	const command = args.shift().toLowerCase();
-/*
-	const reunion = 430591291362115584;
-	votes = reunion.reactions.array();
-	votes.forEach(function (vote) {
-		if ((vote.emoji.id === 418752447557795842) && (vote.count > 1)) {
-			const audioreunion = 374891639313006592;
-			audioreunion.setUserLimit((vote.emoji.count - 1))
-			.catch(console.error);
-		}
-	});
-*/
+	/*
+		const reunion = 430591291362115584;
+		votes = reunion.reactions.array();
+		votes.forEach(function (vote) {
+			if ((vote.emoji.id === 418752447557795842) && (vote.count > 1)) {
+				const audioreunion = 374891639313006592;
+				audioreunion.setUserLimit((vote.emoji.count - 1))
+				.catch(console.error);
+			}
+		});
+	*/
 	if (msg.channel.name === "informations" && !msg.author.bot) {
 		joueurs = msg.channel.members.array();
 		joueurs.forEach(function (joueur) {
@@ -311,11 +343,15 @@ client.on('guildMemberRemove', member => {
 	channel.send("Aurevoir **" + member.user.username + "** ...");
 });
 
+client.on('guildBanAdd', (guild, user) => {
+	logs = guild.channels.find('name', 'logs');
+	logs.send({
+		embed: {
+			thumbnail: {
 
-//LOGS
-/*
-client.on('guildBanAdd', guild, user => {
-	
+			}
+		}
+	})
 });
-*/
+
 client.login(process.env.token);
