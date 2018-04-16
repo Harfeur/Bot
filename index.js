@@ -201,36 +201,7 @@ const commands = {
 		}
 	},
 	'test': (msg) => {
-		msg.channel.send({
-			embed: {
-				color: 3447003,
-				author: {
-					name: client.user.username,
-					icon_url: client.user.avatarURL
-				},
-				title: "This is an embed",
-				url: "http://google.com",
-				description: "This is a test embed to showcase what they look like and what they can do.",
-				fields: [{
-						name: "Fields",
-						value: "They can have different fields with small headlines."
-					},
-					{
-						name: "Masked links",
-						value: "You can put [masked links](http://google.com) inside of rich embeds."
-					},
-					{
-						name: "Markdown",
-						value: "You can put all the *usual* **__Markdown__** inside of them."
-					}
-				],
-				timestamp: new Date(),
-				footer: {
-					icon_url: client.user.avatarURL,
-					text: "© Example"
-				}
-			}
-		});
+		msg.channel.send("Aucun test en cours");
 	}
 };
 
@@ -343,15 +314,86 @@ client.on('guildMemberRemove', member => {
 	channel.send("Aurevoir **" + member.user.username + "** ...");
 });
 
-client.on('guildBanAdd', (guild, user) => {
-	logs = guild.channels.find('name', 'logs');
-	logs.send({
-		embed: {
-			thumbnail: {
+// LOGS
 
+client.on('channelCreate', channel => {
+	const logs = channel.client.channels.find('name', 'logs');
+	logs.send({
+			embed: {
+				color: 4285952,
+				author: {
+					name: channel.client.user.username,
+					icon_url: channel.client.user.avatarURL
+				},
+				title: "Canal <#" + channel.id + "> créé",
+				timestamp: new Date(),
+				footer: {
+					icon_url: client.user.avatarURL,
+					text: "© International-Logistique"
+				}
 			}
-		}
-	})
+		})
+		.catch(console.error);
+});
+
+client.on('channelDelete', channel => {
+	const logs = channel.client.channels.find('name', 'logs');
+	logs.send({
+			embed: {
+				color: 4285952,
+				author: {
+					name: channel.client.user.username,
+					icon_url: channel.client.user.avatarURL
+				},
+				title: "Canal " + channel.name + " supprimé",
+				timestamp: new Date(),
+				footer: {
+					icon_url: client.user.avatarURL,
+					text: "© International-Logistique"
+				}
+			}
+		})
+		.catch(console.error);
+});
+
+client.on('guildBanAdd', (guild, user) => {
+	const logs = guild.channels.find('name', 'logs');
+	logs.send({
+			embed: {
+				color: 16135691,
+				author: {
+					name: user.username,
+					icon_url: user.avatarURL
+				},
+				title: "Joueur banni",
+				timestamp: new Date(),
+				footer: {
+					icon_url: client.user.avatarURL,
+					text: "© International-Logistique"
+				}
+			}
+		})
+		.catch(console.error);
+});
+
+client.on('guildBanRemove', (guild, user) => {
+	const logs = guild.channels.find('name', 'logs');
+	logs.send({
+			embed: {
+				color: 16135691,
+				author: {
+					name: user.username,
+					icon_url: user.avatarURL
+				},
+				title: "Joueur débanni",
+				timestamp: new Date(),
+				footer: {
+					icon_url: client.user.avatarURL,
+					text: "© International-Logistique"
+				}
+			}
+		})
+		.catch(console.error);
 });
 
 client.login(process.env.token);
