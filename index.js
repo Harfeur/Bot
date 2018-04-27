@@ -323,3 +323,7 @@ client.on('guildMemberRemove', member => {
 });
 
 client.login(process.env.token);
+
+client.destroy((err) => {
+	console.log(err);
+});
