@@ -104,15 +104,19 @@ const commands = {
 		msg.channel.send('```Pour être recruté, rien de plus simple. Il vous suffit de remplir le Google Forms et une réponse vous sera donnée dans les plus brefs délais.``` \nhttps://goo.gl/forms/ncAFvOXsOkj8mRGr2');
 	},
 	'feuillederoute': (msg) => {
-		msg.channel.send({
-				files: ['https://cdn.discordapp.com/attachments/399979689558409237/432233905236607036/Feuille_de_route.xlsx']
-			})
-			.catch(console.error);
-		msg.channel.send({
-				files: ['https://cdn.discordapp.com/attachments/399979689558409237/432233904905125888/Comment_faire_une_feuille_de_route.pdf']
-			})
-			.catch(console.error);
-		msg.channel.send('Une fois terminée, vous devez poster la feuille de route dans le canal <#424673120532561922> et les comptables s\'en occuperont !');
+		msg.channel.send('Une fois terminée, vous devez poster la feuille de route dans le canal <#424673120532561922> et les comptables s\'en occuperont !',
+		{
+			files: [{
+				attachment: 'assets/Comment_faire_une_feuille_de_route.pdf',
+				name: 'Comment_faire_une_feuille_de_route.pdf'
+			}]
+		},
+		{
+			files: [{
+				attachment: 'assets/Feuille_de_route.xlsx',
+				name: 'Feuille_de_route.xlsx'
+			}]
+		});
 	},
 	'entreprise': (msg) => {
 		msg.channel.send('https://drive.google.com/open?id=17iusTta_JgnQXh35GMUxoYXOMRqXa7xuD_QoUjJRkIk');
@@ -157,6 +161,9 @@ const commands = {
 			'```'
 		];
 		msg.channel.send(tosend.join('\n'));
+	},
+	'adr': (msg) => {
+		
 	},
 	'valide': (msg) => {
 		let joueur = msg.content.split(' ')[1];
@@ -223,6 +230,7 @@ client.on('message', async msg => {
 			}
 		});
 	*/
+
 	if (msg.channel.name === "informations" && !msg.author.bot) {
 		joueurs = msg.channel.members.array();
 		joueurs.forEach(function (joueur) {
