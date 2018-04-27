@@ -16,7 +16,7 @@ const commands = {
 		console.log(queue);
 		(function play(song) {
 			console.log(song);
-			if (song === undefined) return msg.channel.send('La queue est vide').then(() => {
+			if (song === undefined) return msg.channel.send('La file d\'attente est vide').then(() => {
 				queue[msg.guild.id].playing = false;
 				msg.member.voiceChannel.leave();
 			});
