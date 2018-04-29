@@ -197,6 +197,11 @@ const commands = {
 			msg.channel.send('Merci beaucoup ' + prenom + ' ! Une dernière chose, souhaites-tu rejoindre l\'entreprise ? Réponds par oui ou non :)');
 		}
 	},
+	'nouveau': (msg) => {
+		let pseudo = msg.content.split(' ')[1];
+		msg.delete(1000);
+		if (pseudo == undefined) return msg.channel.send("Aucun joueur mentionné")
+	},
 	'ping': (msg) => {
 		msg.channel.send('Ping !\nPong !\nÀ jour !');
 	},
