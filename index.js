@@ -198,11 +198,6 @@ const commands = {
 			msg.channel.send('Merci beaucoup ' + prenom + ' ! Une dernière chose, souhaites-tu rejoindre l\'entreprise ? Réponds par oui ou non :)');
 		}
 	},
-	'nouveau': (msg) => {
-		let pseudo = msg.content.split(' ')[1];
-		msg.delete(1000);
-		if (pseudo == undefined) return msg.channel.send("Aucun joueur mentionné")
-	},
 	'ping': (msg) => {
 		msg.channel.send('Ping !\nPong !\nÀ jour !');
 	},
@@ -277,6 +272,14 @@ client.on('message', async msg => {
 			const channel = msg.guild.channels.find('name', 'general');
 			channel.send("Bienvenue à <@!" + msg.author.id + "> sur le Discord !");
 		}
+	}
+
+	if (msg.channel.name === "reglement") {
+		msg.member.removeRole('440542013348118548')
+		.catch(console.error);
+		msg.member.addRole('374844057631064066')
+		.catch(console.error);
+		msg.member.send('__**Bienvenue en tant que CDD !**__\nVous pouvez effectuer la commande **' + process.env.prefix + 'help** afin de connaitre les commandes nécessaires à l\'obtention des documents de travail.');
 	}
 
 	if (msg.content.startsWith('VOTE')) {
