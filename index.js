@@ -51,7 +51,7 @@ const commands = {
 					msg.channel.send(`Volume: ${Math.round(dispatcher.volume*50)}%`);
 				} else if (m.content.startsWith(process.env.prefix + 'temps')) {
 					msg.channel.send(`Temps: ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000)/1000) <10 ? '0'+Math.floor((dispatcher.time % 60000)/1000) : Math.floor((dispatcher.time % 60000)/1000)}`);
-				} else if (m.content.startsWith(process.env.prefix + 'leave')) msg.member.voiceChannel.leave();
+				}
 			});
 			dispatcher.on('end', () => {
 				collector.stop();
@@ -64,6 +64,9 @@ const commands = {
 				});
 			});
 		})(queue[msg.guild.id].songs.shift());
+	},
+	'leave': (msg) => {
+		msg.member.voiceChannel.leave();
 	},
 	'join': (msg) => {
 		return new Promise((resolve, reject) => {
