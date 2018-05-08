@@ -121,7 +121,7 @@ const commands = {
 		}, )
 	},
 	'entreprise': (msg) => {
-		msg.channel.send('https://drive.google.com/open?id=17iusTta_JgnQXh35GMUxoYXOMRqXa7xuD_QoUjJRkIk');
+		msg.channel.send('https://docs.google.com/spreadsheets/d/1AeBeN0y3vCHcJou5A_nlifPfSWzl8FGnYKy0oYSMShg/');
 	},
 	'tb': (msg) => {
 		msg.channel.send('http://trucksbook.eu/',{
