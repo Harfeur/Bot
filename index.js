@@ -206,7 +206,7 @@ const commands = {
 	},
 	'reboot': (msg) => {
 		if (msg.author.id == process.env.MaxouCraft) {
-			msg.channel.send("Redémarrage...");
+			await msg.channel.send("Redémarrage...");
 			process.exit();
 		}
 	},
