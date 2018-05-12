@@ -78,7 +78,7 @@ const commands = {
 	'add': (msg) => {
 		let url = msg.content.split(' ')[1];
 		if (url == '' || url === undefined) return msg.channel.send(`Vous devez ajouter un lien YouTube après ${process.env.prefix}add`);
-		yt.getInfo(url, (err, info) => {
+	//	yt.getInfo(url, (err, info) => {
 			if (err) return msg.channel.send('Lien YouTube invalide: ' + err);
 			if (!queue.hasOwnProperty(msg.guild.id)) queue[msg.guild.id] = {}, queue[msg.guild.id].playing = false, queue[msg.guild.id].songs = [];
 			queue[msg.guild.id].songs.push({
@@ -87,7 +87,7 @@ const commands = {
 				requester: msg.author.username
 			});
 			msg.channel.send(`**${info.title}** ajouté à la queue`);
-		});
+	//	});
 	},
 	'queue': (msg) => {
 		if (queue[msg.guild.id] === undefined) return msg.channel.send(`Ajoutez des musiques à la queue avec ${process.env.prefix}add`);
@@ -147,9 +147,11 @@ const commands = {
 			process.env.prefix + 'tb : "Tutoriel TrucksBook et site"',
 			process.env.prefix + 'accident : "Signaler un accident avec votre camion"',
 			process.env.prefix + 'assistance : "Signaler une demande d\'appel de dépaneuse pour votre camion"',
+			process.env.prefix + 'garages : "Afficher les garages de l\'entreprise"',
 			'',
 			'Commandes pour la musique :'.toUpperCase(),
 			process.env.prefix + 'join : "Envoyer le bot dans le canal audio actuel"',
+			process.env.prefix + 'leave : "Enlever le bot du canal audio actuel"',
 			process.env.prefix + 'add : "Ajouter un lien YouTube dans la queue"',
 			process.env.prefix + 'queue : "Affiche la queue actuelle."',
 			process.env.prefix + 'play : "Jouer la queue actuelle."',
@@ -165,8 +167,8 @@ const commands = {
 		];
 		msg.channel.send(tosend.join('\n'));
 	},
-	'adr': (msg) => {
-
+	'garages': (msg) => {
+		msg.channel.send("Les garages se situent à **Paris**, **Lyon**, **Oslo**, **Berlin**, **Rome**");
 	},
 	'valide': (msg) => {
 		let joueur = msg.content.split(' ')[1];
@@ -206,8 +208,9 @@ const commands = {
 	},
 	'reboot': (msg) => {
 		if (msg.author.id == process.env.MaxouCraft) {
-			msg.channel.send("Redémarrage...");
-			process.exit();
+			msg.channel.send("Redémarrage...")
+			.then(process.exit())
+			.catch(console.error);
 		}
 	},
 	'test': (msg) => {
