@@ -103,7 +103,9 @@ const commands = {
 		if (radio == undefined || radio == ' ') return msg.channel.send("Vous n'avez pas choisi de radio");
 		switch (radio) {
 			case 'nrj':
-				client.voiceConnection.playStream('http://185.52.127.163/fr/30001/mp3_128.mp3');
+				require('http').get("http://185.52.127.163/fr/30001/mp3_128.mp3", (res) => {
+					client.voiceConnection.playStream(res);
+				})
 				break;
 			default:
 				msg.channel.send("Cette radio n\'est pas disponible, contactez Maxime pour plus d\'informations.");
