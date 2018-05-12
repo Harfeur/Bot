@@ -184,7 +184,7 @@ const commands = {
 		msg.channel.send(tosend.join('\n'));
 	},
 	'garages': (msg) => {
-		msg.channel.send("Les garages se situent à **Paris**, **Lyon**, **Oslo**, **Berlin**, **Rome**");
+		msg.channel.send("Les garages se situent à **Paris**, **Lyon**, **Oslo**, **Berlin**, **Rome**, **Londres**, **Katowice**");
 	},
 	'valide': (msg) => {
 		let joueur = msg.content.split(' ')[1];
