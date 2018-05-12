@@ -100,6 +100,7 @@ const commands = {
 	'radio': (msg) => {
 		let radio = msg.content.toLowerCase().split(' ')[1];
 		if (radio == undefined || radio == ' ') return msg.channel.send("Les radios disponibles sont : **Skyrock, Funradio, RTL, TFM, RFM**");
+		msg.member.voiceChannel.leave();
 		switch (radio) {
 			case 'skyrock':
 				msg.member.voiceChannel.join().then(connection => {
@@ -142,7 +143,7 @@ const commands = {
 					.catch(console.error);
 				break;
 			default:
-				msg.channel.send("Cette radio n\'est pas disponible, contactez Maxime pour plus d\'informations.");
+				msg.channel.send("Cette radio n\'est pas disponible. Contactez Maxime pour plus d\'informations.");
 		}
 	},
 	'invite': (msg => {
