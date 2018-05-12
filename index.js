@@ -101,12 +101,13 @@ const commands = {
 		let radio = msg.content.toLowerCase().split(' ')[1];
 		if (radio == undefined || radio == ' ') return msg.channel.send("Vous n'avez pas choisi de radio");
 		switch (radio) {
-			case 'nrj':
+			case 'skyrock':
 				msg.member.voiceChannel.join().then(connection => {
-					require('http').get("http://cdn.nrjaudio.fm/audio1/fr/30001/mp3_128.mp3", (res) => {
+					require('http').get("http://icecast.skyrock.net/s/natio_mp3_128k", (res) => {
 						connection.playStream(res);
 					})
-				});
+				})
+				.catch(console.error);
 				break;
 			default:
 				msg.channel.send("Cette radio n\'est pas disponible, contactez Maxime pour plus d\'informations.");
