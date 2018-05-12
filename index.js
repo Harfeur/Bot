@@ -111,7 +111,7 @@ const commands = {
 				break;
 			case 'funradio':
 				msg.member.voiceChannel.join().then(connection => {
-					require('http').get("http://streaming.radio.funradio.fr/fun-tls-44-128", (res) => {
+					require('http').get("http://streaming.radio.funradio.fr/fun-pam-44-128", (res) => {
 						connection.playStream(res);
 					})
 				})
