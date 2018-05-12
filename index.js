@@ -103,8 +103,10 @@ const commands = {
 		if (!msg.guild.voiceConnection) return commands.join(msg).then(() => commands.radio(msg));
 		switch (radio) {
 			case 'nrj':
-				require('http').get("http://185.52.127.163/fr/30001/mp3_128.mp3", (res) => {
-					client.voiceConnection.playStream(res);
+				message.member.voiceChannel.join().then(connection => {
+					require('http').get("http://cdn.nrjaudio.fm/audio1/fr/30001/mp3_128.mp3", (res) => {
+						connection.playStream(res);
+					})
 				})
 				break;
 			default:
