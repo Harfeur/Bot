@@ -107,7 +107,7 @@ const commands = {
 					require('http').get("http://cdn.nrjaudio.fm/audio1/fr/30001/mp3_128.mp3", (res) => {
 						connection.playStream(res);
 					})
-				})
+				});
 				break;
 			default:
 				msg.channel.send("Cette radio n\'est pas disponible, contactez Maxime pour plus d\'informations.");
