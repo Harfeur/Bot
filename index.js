@@ -99,7 +99,7 @@ const commands = {
 	},
 	'radio': (msg) => {
 		let radio = msg.content.toLowerCase().split(' ')[1];
-		if (radio == undefined || radio == ' ') return msg.channel.send("Vous n'avez pas choisi de radio");
+		if (radio == undefined || radio == ' ') return msg.channel.send("Les radios disponibles sont : **Skyrock, Funradio, RTL, TFM, RFM**");
 		switch (radio) {
 			case 'skyrock':
 				msg.member.voiceChannel.join().then(connection => {
@@ -107,7 +107,39 @@ const commands = {
 						connection.playStream(res);
 					})
 				})
-				.catch(console.error);
+					.catch(console.error);
+				break;
+			case 'funradio':
+				msg.member.voiceChannel.join().then(connection => {
+					require('http').get("http://streaming.radio.funradio.fr/fun-tls-44-128", (res) => {
+						connection.playStream(res);
+					})
+				})
+					.catch(console.error);
+				break;
+			case 'rtl':
+				msg.member.voiceChannel.join().then(connection => {
+					require('http').get("http://streaming.radio.rtl.fr/rtl-1-48-192", (res) => {
+						connection.playStream(res);
+					})
+				})
+					.catch(console.error);
+				break;
+			case 'tfm':
+				msg.member.voiceChannel.join().then(connection => {
+					require('http').get("https://radio.truckers.fm/", (res) => {
+						connection.playStream(res);
+					})
+				})
+					.catch(console.error);
+				break;
+			case 'rfm':
+				msg.member.voiceChannel.join().then(connection => {
+					require('http').get("http://vipicecast.yacast.net/rfm_128", (res) => {
+						connection.playStream(res);
+					})
+				})
+					.catch(console.error);
 				break;
 			default:
 				msg.channel.send("Cette radio n\'est pas disponible, contactez Maxime pour plus d\'informations.");
