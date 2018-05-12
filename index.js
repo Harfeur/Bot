@@ -24,8 +24,8 @@ const commands = {
 			dispatcher = msg.guild.voiceConnection.playStream(yt(song.url, {
 				audioonly: true
 			}), {
-				passes: process.env.passes
-			});
+					passes: process.env.passes
+				});
 			let collector = msg.channel.createCollector(m => m);
 			dispatcher.setVolume(0.2);
 			collector.on('message', m => {
@@ -42,15 +42,15 @@ const commands = {
 						dispatcher.end();
 					});
 				} else if (m.content.startsWith('volume+')) {
-					if (Math.round(dispatcher.volume * 50) >= 100) return msg.channel.send(`Volume: ${Math.round(dispatcher.volume*50)}%`);
+					if (Math.round(dispatcher.volume * 50) >= 100) return msg.channel.send(`Volume: ${Math.round(dispatcher.volume * 50)}%`);
 					dispatcher.setVolume(Math.min((dispatcher.volume * 50 + (5 * (m.content.split('+').length - 1))) / 50, 2));
-					msg.channel.send(`Volume: ${Math.round(dispatcher.volume*50)}%`);
+					msg.channel.send(`Volume: ${Math.round(dispatcher.volume * 50)}%`);
 				} else if (m.content.startsWith('volume-')) {
-					if (Math.round(dispatcher.volume * 50) <= 0) return msg.channel.send(`Volume: ${Math.round(dispatcher.volume*50)}%`);
+					if (Math.round(dispatcher.volume * 50) <= 0) return msg.channel.send(`Volume: ${Math.round(dispatcher.volume * 50)}%`);
 					dispatcher.setVolume(Math.max((dispatcher.volume * 50 - (5 * (m.content.split('-').length - 1))) / 50, 0));
-					msg.channel.send(`Volume: ${Math.round(dispatcher.volume*50)}%`);
+					msg.channel.send(`Volume: ${Math.round(dispatcher.volume * 50)}%`);
 				} else if (m.content.startsWith(process.env.prefix + 'temps')) {
-					msg.channel.send(`Temps: ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000)/1000) <10 ? '0'+Math.floor((dispatcher.time % 60000)/1000) : Math.floor((dispatcher.time % 60000)/1000)}`);
+					msg.channel.send(`Temps: ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000) / 1000) < 10 ? '0' + Math.floor((dispatcher.time % 60000) / 1000) : Math.floor((dispatcher.time % 60000) / 1000)}`);
 				}
 			});
 			dispatcher.on('end', () => {
@@ -78,7 +78,7 @@ const commands = {
 	'add': (msg) => {
 		let url = msg.content.split(' ')[1];
 		if (url == '' || url === undefined) return msg.channel.send(`Vous devez ajouter un lien YouTube après ${process.env.prefix}add`);
-	//	yt.getInfo(url, (err, info) => {
+		yt.getInfo(url, (err, info) => {
 			if (err) return msg.channel.send('Lien YouTube invalide: ' + err);
 			if (!queue.hasOwnProperty(msg.guild.id)) queue[msg.guild.id] = {}, queue[msg.guild.id].playing = false, queue[msg.guild.id].songs = [];
 			queue[msg.guild.id].songs.push({
@@ -87,15 +87,28 @@ const commands = {
 				requester: msg.author.username
 			});
 			msg.channel.send(`**${info.title}** ajouté à la queue`);
-	//	});
+		});
 	},
 	'queue': (msg) => {
 		if (queue[msg.guild.id] === undefined) return msg.channel.send(`Ajoutez des musiques à la queue avec ${process.env.prefix}add`);
 		let tosend = [];
 		queue[msg.guild.id].songs.forEach((song, i) => {
-			tosend.push(`${i+1}. ${song.title} - Demandé par: ${song.requester}`);
+			tosend.push(`${i + 1}. ${song.title} - Demandé par: ${song.requester}`);
 		});
-		msg.channel.send(`Queue de musiques : Actuellement **${tosend.length}** musiques dans la queue. ${(tosend.length > 15 ? '*[Sueles les 15 prochaines sont affichées]*' : '')}\n\`\`\`${tosend.slice(0,15).join('\n')}\`\`\``);
+		msg.channel.send(`Queue de musiques : Actuellement **${tosend.length}** musiques dans la queue. ${(tosend.length > 15 ? '*[Sueles les 15 prochaines sont affichées]*' : '')}\n\`\`\`${tosend.slice(0, 15).join('\n')}\`\`\``);
+	},
+	'radio': (msg) => {
+		if (!msg.guild.voiceConnection) return commands.join(msg).then(() => commands.radio(msg));
+		let text = msg.content.split(' ')[1];
+		let radio = text.toLowerCase();
+		if (radio == undefined || radio == ' ') return msg.channel.send("Vous n'avez pas choisi de radio");
+		switch (radio) {
+			case 'nrj':
+				client.voiceConnection.playStream('http://185.52.127.163/fr/30001/mp3_128.mp3');
+				break;
+			default:
+				msg.channel.send("Cette radio n\'est pas disponible, contactez Maxime pour plus d\'informations.");
+		}
 	},
 	'invite': (msg => {
 		msg.channel.send('Invitez vos amis : https://discord.gg/zYpeSk6 ! L\'invitation est invalide pour vous, c\'est normal !');
@@ -124,7 +137,7 @@ const commands = {
 		msg.channel.send('https://docs.google.com/spreadsheets/d/1AeBeN0y3vCHcJou5A_nlifPfSWzl8FGnYKy0oYSMShg/');
 	},
 	'tb': (msg) => {
-		msg.channel.send('http://trucksbook.eu/',{
+		msg.channel.send('http://trucksbook.eu/', {
 			files: [{
 				attachment: 'assets/Tutoriel_TruckBook.pdf',
 				name: 'Tutoriel TruckBook.pdf'
@@ -209,8 +222,8 @@ const commands = {
 	'reboot': (msg) => {
 		if (msg.author.id == process.env.MaxouCraft) {
 			msg.channel.send("Redémarrage...")
-			.then(process.exit())
-			.catch(console.error);
+				.then(process.exit())
+				.catch(console.error);
 		}
 	},
 	'test': (msg) => {
@@ -282,9 +295,9 @@ client.on('message', async msg => {
 
 	if (msg.channel.name === "reglement") {
 		msg.member.removeRole('440542013348118548')
-		.catch(console.error);
+			.catch(console.error);
 		msg.member.addRole('374844057631064066')
-		.catch(console.error);
+			.catch(console.error);
 		msg.member.send('__**Bienvenue en tant que CDD !**__\nVous pouvez effectuer la commande **' + process.env.prefix + 'help** afin de connaitre les commandes nécessaires à l\'obtention des documents de travail.');
 	}
 
