@@ -100,7 +100,6 @@ const commands = {
 	'radio': (msg) => {
 		let radio = msg.content.toLowerCase().split(' ')[1];
 		if (radio == undefined || radio == ' ') return msg.channel.send("Vous n'avez pas choisi de radio");
-		if (!msg.guild.voiceConnection) return commands.join(msg).then(() => commands.radio(msg));
 		switch (radio) {
 			case 'nrj':
 				msg.member.voiceChannel.join().then(connection => {
