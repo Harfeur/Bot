@@ -98,9 +98,9 @@ const commands = {
 		msg.channel.send(`Queue de musiques : Actuellement **${tosend.length}** musiques dans la queue. ${(tosend.length > 15 ? '*[Sueles les 15 prochaines sont affichées]*' : '')}\n\`\`\`${tosend.slice(0, 15).join('\n')}\`\`\``);
 	},
 	'radio': (msg) => {
-		if (!msg.guild.voiceConnection) return commands.join(msg).then(() => commands.radio(msg));
 		let radio = msg.content.toLowerCase().split(' ')[1];
 		if (radio == undefined || radio == ' ') return msg.channel.send("Vous n'avez pas choisi de radio");
+		if (!msg.guild.voiceConnection) return commands.join(msg).then(() => commands.radio(msg));
 		switch (radio) {
 			case 'nrj':
 				require('http').get("http://185.52.127.163/fr/30001/mp3_128.mp3", (res) => {
