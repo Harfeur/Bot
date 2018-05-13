@@ -128,7 +128,9 @@ const commands = {
 				break;
 			case 'tfm':
 				msg.member.voiceChannel.join().then(connection => {
-					connection.playArbitraryInput('https://radio.truckers.fm', { volume: 0.1 });
+					require('https').get("https://radio.truckers.fm", (res) => {
+						connection.playStream(res, { volume: 0.1 });
+					})
 				})
 					.catch(console.error);
 				break;
