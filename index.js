@@ -396,7 +396,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
 			console.log(membres.length);
 			if (membres.length == 1) {
 				console.log("Déconnexion ...");
-				vocal.disconnect;
+				canal.channel.leave();
 			}
 		}
 	});
