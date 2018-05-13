@@ -394,7 +394,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
 		if (canal.channel.id == oldMember.voiceChannelID) {
 			membres = canal.channel.members.array();
 			console.log(membres.length);
-			if (membres.length == 1) return canal.channel.leave;
+			if (membres.length == 1) return vocal.disconnect;
 		}
 	});
 });
