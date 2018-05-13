@@ -105,7 +105,7 @@ const commands = {
 			case 'skyrock':
 				msg.member.voiceChannel.join().then(connection => {
 					require('http').get("http://icecast.skyrock.net/s/natio_mp3_128k", (res) => {
-						connection.playStream(res, {volume : 0.1});
+						connection.playStream(res, { volume: 0.1 });
 					})
 				})
 					.catch(console.error);
@@ -113,7 +113,7 @@ const commands = {
 			case 'funradio':
 				msg.member.voiceChannel.join().then(connection => {
 					require('http').get("http://streaming.radio.funradio.fr/fun-pam-44-128", (res) => {
-						connection.playStream(res, {volume : 0.1});
+						connection.playStream(res, { volume: 0.1 });
 					})
 				})
 					.catch(console.error);
@@ -121,7 +121,7 @@ const commands = {
 			case 'rtl':
 				msg.member.voiceChannel.join().then(connection => {
 					require('http').get("http://streaming.radio.rtl.fr/rtl-1-48-192", (res) => {
-						connection.playStream(res, {volume : 0.1});
+						connection.playStream(res, { volume: 0.1 });
 					})
 				})
 					.catch(console.error);
@@ -129,7 +129,7 @@ const commands = {
 			case 'tfm':
 				msg.member.voiceChannel.join().then(connection => {
 					require('http').get("https://radio.truckers.fm", (res) => {
-						connection.playStream(res, {volume : 0.1});
+						connection.playStream(res, { volume: 0.1 });
 					})
 				})
 					.catch(console.error);
@@ -137,7 +137,7 @@ const commands = {
 			case 'rfm':
 				msg.member.voiceChannel.join().then(connection => {
 					require('http').get("http://vipicecast.yacast.net/rfm_128", (res) => {
-						connection.playStream(res, {volume : 0.1});
+						connection.playStream(res, { volume: 0.1 });
 					})
 				})
 					.catch(console.error);
@@ -383,6 +383,11 @@ client.on('guildMemberAdd', member => {
 client.on('guildMemberRemove', member => {
 	const channel = member.guild.channels.find('name', 'general');
 	channel.send("Aurevoir **" + member.user.username + "** ...");
+});
+
+client.on('voiceStateUpdate', (oldMember, newMember) => {
+	console.log(oldMember.voiceChannelID);
+	if (oldMember.voiceChannelID == newMember.voiceChannelID) return;
 });
 
 client.login(process.env.token);
