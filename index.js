@@ -386,12 +386,15 @@ client.on('guildMemberRemove', member => {
 });
 
 client.on('voiceStateUpdate', (oldMember, newMember) => {
+	console.log(oldMember.voiceChannelID);
 	if (oldMember.voiceChannelID == newMember.voiceChannelID) return;
 	vocal = client.voiceConnections.array();
 	vocal.forEach(function (canal) {
+		console.log(canal.channel.id);
 		if (canal.channel.id == oldMember.voiceChannelID) {
 			membres = canal.channel.members.array();
-			if (membres.length == 1) canal.channel.leave;
+			console.log(membres.length);
+			if (membres.length == 1) return canal.channel.leave;
 		}
 	});
 });
