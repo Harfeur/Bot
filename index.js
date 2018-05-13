@@ -386,8 +386,14 @@ client.on('guildMemberRemove', member => {
 });
 
 client.on('voiceStateUpdate', (oldMember, newMember) => {
-	console.log(oldMember.voiceChannelID);
 	if (oldMember.voiceChannelID == newMember.voiceChannelID) return;
+	vocal = client.voiceConnections.array();
+	vocal.forEach(function (canal) {
+		if (canal.channel.id == oldMember.voiceChannelID) {
+			membres = canal.channel.members.array();
+			if (membres.length == 1) canal.channel.leave;
+		}
+	});
 });
 
 client.login(process.env.token);
