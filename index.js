@@ -381,8 +381,8 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('guildMemberRemove', member => {
-	const channel = member.guild.channels.find('name', 'general');
-	channel.send("Aurevoir **" + member.user.username + "** ...");
+	const channel = member.guild.channels.find('name', 'direction');
+	channel.send("**<@" + member.id + ">** a quitté le serveur.");
 });
 
 client.on('voiceStateUpdate', (oldMember, newMember) => {
