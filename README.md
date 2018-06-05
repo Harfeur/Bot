@@ -11,8 +11,9 @@ Utilisation de l'API de Discord.js, de FFMPEG et de Google Sheets
 La constante 'commands' définie permet de stocker les commandes basiques.
 Parmi ces commandes, la commande .prenom permet d'attribuer au nouvel arrivant un prénom dans son pseudo et un rôle afin qu'il puisse rejoindre les différents canaux de discussion.
 
-Après l'évènement 'message', le bot est programmé pour envoyer (par message privé) toutes les nouvelles informations du canal #informations. De plus, en cas de nouvelle feuille de route à traiter, le bot va envoyer un message aux différents comptables de l'entreprise.
-De plus, il répondra quand on lui dira "Bonjour", "Bonsoir" ou "Bonne nuit".
+Après l'évènement 'message', le bot est programmé pour envoyer (par message privé) toutes les nouvelles informations du canal #informations. En cas de nouvelle feuille de route à traiter, le bot va envoyer un message aux différents comptables de l'entreprise.
+
+Le bot dispose du canal 'bienvenue' pour demander à chaque personne son nom et s'il souhaite rejoindre l'entreprise ou non. Il attribue automatique ce nom à l'utilisateur, dans le but de faciliter les échanges entre les membres du serveur.
 
 ## Aide au développement
 
