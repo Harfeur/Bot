@@ -1,5 +1,7 @@
 # Bot International Logistique
 
+[![dependencies Status](https://david-dm.org/Harfeur/Bot/status.svg)](https://david-dm.org/Harfeur/Bot)
+
 Ce bot a été créé dans le but de servir à une entreprise virtuelle (VTC). Il peut être testé sur le [Discord](https://discord.gg/kkT3U5G) car il est actuellement en utilisation privée.
 
 ## Fichiers API
