@@ -6,9 +6,9 @@
   "dependencies": {
     "discord.js": "^11.3.2",
     "forever": "^0.15.3",
-    "googleapis": "^27.0.0",
-    "node-opus": "^0.2.7",
-    "npm": "^5.8.0",
+    "googleapis": "^32.0.0",
+    "node-opus": "^0.3.0",
+    "npm": "^6.1.0",
     "ytdl-core": "^0.20.2"
   },
   "devDependencies": {},
