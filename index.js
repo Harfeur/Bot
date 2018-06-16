@@ -170,7 +170,7 @@ const commands = {
 		}, )
 	},
 	'entreprise': (msg) => {
-		msg.channel.send('https://docs.google.com/spreadsheets/d/1AeBeN0y3vCHcJou5A_nlifPfSWzl8FGnYKy0oYSMShg/');
+		msg.channel.send('https://docs.google.com/spreadsheets/d/15rk6Y5ufp35Unkjv3BBZwP66Fy4UqCLD2UAEgnn-1YM/');
 	},
 	'tb': (msg) => {
 		msg.channel.send('http://trucksbook.eu/', {
