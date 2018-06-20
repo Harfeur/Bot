@@ -14,7 +14,7 @@ fs.readdir("./commandes/", (err, files) => {
 	if (jsf.length == 0) return;
 
 	jsf.forEach((f, i) => {
-		let props = require(`./commands/${f}`);
+		let props = require(`./commandes/${f}`);
 		client.commands.set(props.help.name, props);
 	});
 });
