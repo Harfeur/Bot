@@ -1,23 +1,9 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const yt = require('ytdl-core');
-const fs = require("fs");
 new Discord.RichEmbed();
 
-client.commands = new Discord.Collection();
-
 let queue = {};
-
-fs.readdir("./commandes/", (err, files) => {
-	if (err) throw (err);
-	let jsf = files.filter(f => f.split(".").pop() === "js");
-	if (jsf.length == 0) return;
-
-	jsf.forEach((f, i) => {
-		let props = require(`./commandes/${f}`);
-		client.commands.set(props.help.name, props);
-	});
-});
 
 const commands = {
 	'play': (msg) => {
@@ -296,9 +282,10 @@ client.on('ready', () => {
 });
 
 client.on('message', async msg => {
-	if (msg.author.bot) return;
+	const args = msg.content.slice(process.env.prefix.length).trim().split(/ +/g);
+	const command = args.shift().toLowerCase();
 
-	if (msg.channel.name === "informations") {
+	if (msg.channel.name === "informations" && !msg.author.bot) {
 		joueurs = msg.channel.members.array();
 		joueurs.forEach(function (joueur) {
 			if (!joueur.user.bot) {
@@ -356,16 +343,18 @@ client.on('message', async msg => {
 			.catch(console.error);
 	}
 
-	if (msg.content.startsWith("Bonjour") || msg.content.startsWith("bonjour")) {
-		msg.reply("Bonjour !");
-	}
+	if (!msg.author.bot) {
+		if (msg.content.startsWith("Bonjour") || msg.content.startsWith("bonjour")) {
+			msg.reply("Bonjour !");
+		}
 
-	if (msg.content.startsWith("Bonsoir") || msg.content.startsWith("bonsoir")) {
-		msg.reply("Bonsoir !");
-	}
+		if (msg.content.startsWith("Bonsoir") || msg.content.startsWith("bonsoir")) {
+			msg.reply("Bonsoir !");
+		}
 
-	if (msg.content.startsWith("Bonne nuit") || msg.content.startsWith("bonne nuit")) {
-		msg.reply("Bonne nuit !");
+		if (msg.content.startsWith("Bonne nuit") || msg.content.startsWith("bonne nuit")) {
+			msg.reply("Bonne nuit !");
+		}
 	}
 
 	if (command === 'purge') {
@@ -381,13 +370,6 @@ client.on('message', async msg => {
 		}
 	}
 
-	msg = msg.content.split(" ");
-	let cmd = msg[0].toLowerCase();
-	let args = msg.slice(1);
-
-	cmdf = client.commands.get(cmd.slice(prefix.length));
-	if (cmdf) cmdf.run(client, message, args);
-	
 	if (!msg.content.startsWith(process.env.prefix)) return;
 	if (commands.hasOwnProperty(msg.content.toLowerCase().slice(process.env.prefix.length).split(' ')[0])) commands[msg.content.toLowerCase().slice(process.env.prefix.length).split(' ')[0]](msg);
 });
