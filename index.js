@@ -380,7 +380,7 @@ client.on('message', async msg => {
 		}
 	}
 
-	let msg = msg.content.split(" ");
+	msg = msg.content.split(" ");
 	let cmd = msg[0].toLowerCase();
 	let args = msg.slice(1);
 
