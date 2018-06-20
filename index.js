@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const yt = require('ytdl-core');
+const fs = require("fs");
 new Discord.RichEmbed();
 
 client.commands = new Discord.Collection();
