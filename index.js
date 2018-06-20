@@ -3,7 +3,20 @@ const client = new Discord.Client();
 const yt = require('ytdl-core');
 new Discord.RichEmbed();
 
+client.commands = new Discord.Collection();
+
 let queue = {};
+
+fs.readdir("./commandes/", (err, files) => {
+	if (err) throw (err);
+	let jsf = files.filter(f => f.split(".").pop() === "js");
+	if (jsf.length == 0) return;
+
+	jsf.forEach((f, i) => {
+		let props = require(`./commands/${f}`);
+		client.commands.set(props.help.name, props);
+	});
+});
 
 const commands = {
 	'play': (msg) => {
@@ -24,8 +37,8 @@ const commands = {
 			dispatcher = msg.guild.voiceConnection.playStream(yt(song.url, {
 				audioonly: true
 			}), {
-					passes: process.env.passes
-				});
+				passes: process.env.passes
+			});
 			let collector = msg.channel.createCollector(m => m);
 			dispatcher.setVolume(0.2);
 			collector.on('message', m => {
@@ -104,42 +117,52 @@ const commands = {
 		switch (radio) {
 			case 'skyrock':
 				msg.member.voiceChannel.join().then(connection => {
-					require('http').get("http://icecast.skyrock.net/s/natio_mp3_128k", (res) => {
-						connection.playStream(res, { volume: 0.1 });
+						require('http').get("http://icecast.skyrock.net/s/natio_mp3_128k", (res) => {
+							connection.playStream(res, {
+								volume: 0.1
+							});
+						})
 					})
-				})
 					.catch(console.error);
 				break;
 			case 'funradio':
 				msg.member.voiceChannel.join().then(connection => {
-					require('http').get("http://streaming.radio.funradio.fr/fun-pam-44-128", (res) => {
-						connection.playStream(res, { volume: 0.1 });
+						require('http').get("http://streaming.radio.funradio.fr/fun-pam-44-128", (res) => {
+							connection.playStream(res, {
+								volume: 0.1
+							});
+						})
 					})
-				})
 					.catch(console.error);
 				break;
 			case 'rtl':
 				msg.member.voiceChannel.join().then(connection => {
-					require('http').get("http://streaming.radio.rtl.fr/rtl-1-48-192", (res) => {
-						connection.playStream(res, { volume: 0.1 });
+						require('http').get("http://streaming.radio.rtl.fr/rtl-1-48-192", (res) => {
+							connection.playStream(res, {
+								volume: 0.1
+							});
+						})
 					})
-				})
 					.catch(console.error);
 				break;
 			case 'tfm':
 				msg.member.voiceChannel.join().then(connection => {
-					require('https').get("https://radio.truckers.fm", (res) => {
-						connection.playStream(res, { volume: 0.1 });
+						require('https').get("https://radio.truckers.fm", (res) => {
+							connection.playStream(res, {
+								volume: 0.1
+							});
+						})
 					})
-				})
 					.catch(console.error);
 				break;
 			case 'rfm':
 				msg.member.voiceChannel.join().then(connection => {
-					require('http').get("http://vipicecast.yacast.net/rfm_128", (res) => {
-						connection.playStream(res, { volume: 0.1 });
+						require('http').get("http://vipicecast.yacast.net/rfm_128", (res) => {
+							connection.playStream(res, {
+								volume: 0.1
+							});
+						})
 					})
-				})
 					.catch(console.error);
 				break;
 			default:
@@ -272,10 +295,9 @@ client.on('ready', () => {
 });
 
 client.on('message', async msg => {
-	const args = msg.content.slice(process.env.prefix.length).trim().split(/ +/g);
-	const command = args.shift().toLowerCase();
+	if (msg.author.bot) return;
 
-	if (msg.channel.name === "informations" && !msg.author.bot) {
+	if (msg.channel.name === "informations") {
 		joueurs = msg.channel.members.array();
 		joueurs.forEach(function (joueur) {
 			if (!joueur.user.bot) {
@@ -333,18 +355,16 @@ client.on('message', async msg => {
 			.catch(console.error);
 	}
 
-	if (!msg.author.bot) {
-		if (msg.content.startsWith("Bonjour") || msg.content.startsWith("bonjour")) {
-			msg.reply("Bonjour !");
-		}
+	if (msg.content.startsWith("Bonjour") || msg.content.startsWith("bonjour")) {
+		msg.reply("Bonjour !");
+	}
 
-		if (msg.content.startsWith("Bonsoir") || msg.content.startsWith("bonsoir")) {
-			msg.reply("Bonsoir !");
-		}
+	if (msg.content.startsWith("Bonsoir") || msg.content.startsWith("bonsoir")) {
+		msg.reply("Bonsoir !");
+	}
 
-		if (msg.content.startsWith("Bonne nuit") || msg.content.startsWith("bonne nuit")) {
-			msg.reply("Bonne nuit !");
-		}
+	if (msg.content.startsWith("Bonne nuit") || msg.content.startsWith("bonne nuit")) {
+		msg.reply("Bonne nuit !");
 	}
 
 	if (command === 'purge') {
@@ -360,6 +380,13 @@ client.on('message', async msg => {
 		}
 	}
 
+	let msg = msg.content.split(" ");
+	let cmd = msg[0].toLowerCase();
+	let args = msg.slice(1);
+
+	cmdf = client.commands.get(cmd.slice(prefix.length));
+	if (cmdf) cmdf.run(client, message, args);
+	
 	if (!msg.content.startsWith(process.env.prefix)) return;
 	if (commands.hasOwnProperty(msg.content.toLowerCase().slice(process.env.prefix.length).split(' ')[0])) commands[msg.content.toLowerCase().slice(process.env.prefix.length).split(' ')[0]](msg);
 });
