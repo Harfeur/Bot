@@ -296,15 +296,17 @@ client.on('message', async msg => {
 
 	if (msg.channel.name === "test-bot" && msg.content === "boum") {
 		msg.member.addRole('398203935556632577')
-		.catch(console.error);
+			.catch(console.error);
 	}
 
-	msg.channel.send({
-		files: [{
-			attachment: 'assets/teddy.jpg',
-			name: 'Teddy.jpg'
-		}]
-	});
+	if (!msg.author.bot) {
+		msg.channel.send({
+			files: [{
+				attachment: 'assets/teddy.jpg',
+				name: 'Teddy.jpg'
+			}]
+		});
+	}
 
 	if (msg.channel.name === "feuilles-de-route") {
 		fichiers = msg.attachments.array();
