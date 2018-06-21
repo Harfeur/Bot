@@ -299,8 +299,6 @@ client.on('message', async msg => {
 			.catch(console.error);
 	}
 
-		msg.channel.send('SPAM');
-
 	if (msg.channel.name === "feuilles-de-route") {
 		fichiers = msg.attachments.array();
 		console.log(fichiers);
