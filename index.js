@@ -296,7 +296,7 @@ client.on('message', async msg => {
 
 	if (msg.channel.name === "test-bot" && msg.content === "boum") {
 		msg.member.addRole('398203935556632577')
-		.catch(conole.error);
+		.catch(console.error);
 	}
 
 	if (msg.channel.name === "feuilles-de-route") {
