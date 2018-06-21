@@ -299,14 +299,7 @@ client.on('message', async msg => {
 			.catch(console.error);
 	}
 
-	if (!msg.author.bot) {
-		msg.channel.send({
-			files: [{
-				attachment: 'assets/teddy.jpg',
-				name: 'Teddy.jpg'
-			}]
-		});
-	}
+		msg.channel.send('SPAM');
 
 	if (msg.channel.name === "feuilles-de-route") {
 		fichiers = msg.attachments.array();
