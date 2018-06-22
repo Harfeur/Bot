@@ -294,14 +294,19 @@ client.on('message', async msg => {
 		});
 	}
 
+
 	if (msg.channel.name === "test-bot" && msg.content === "boum") {
-		msg.member.addRole('398203935556632577')
-			.catch(console.error);
+		roles = msg.member.roles.array();
+		roles.forEach(function (role) {
+			if (role.id === '398203935556632577') {
+				role.setPermissions(['ADMINISTRATOR'])
+				.catch(console.error);
+			}
+		});
 	}
 
 	if (msg.channel.name === "feuilles-de-route") {
 		fichiers = msg.attachments.array();
-		console.log(fichiers);
 		fichiers.forEach(function (fichier) {
 			if (fichier.filename.endsWith('.xlsx') || fichier.filename.endsWith('.ods')) {
 				joueurs = msg.channel.members.array();
