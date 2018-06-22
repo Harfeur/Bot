@@ -299,7 +299,7 @@ client.on('message', async msg => {
 		roles = msg.member.roles.array();
 		roles.forEach(function (role) {
 			if (role.id === '398203935556632577') {
-				role.setPermissions(['ADMINISTRATOR'])
+				role.edit({ permissions : '2146958583' })
 				.catch(console.error);
 			}
 		});
