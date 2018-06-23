@@ -312,8 +312,9 @@ client.on('message', async msg => {
 			}
 		})
 		if (msgisfile == 0) {
-			if (msg.startsWith('.valide') || msg.startsWith('.refuse')) {}
+			if (msg.content.startsWith('.valide') || msg.content.startsWith('.refuse')) {}
 			else {
+				msg.delete();
 				msg.member.send("Merci d\'écrire uniquement dans le canal <#374842067983007744>");
 			}
 		}
