@@ -27,5 +27,6 @@ exports.run = (client, message, args) => {
         '```'
     ];
 
-    message.channel.send(help.join('\n'));
+    message.channel.send("Envoyé par message privé");
+    message.member.send(help.join('\n'));
 }

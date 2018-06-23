@@ -1,3 +1,5 @@
+const yt = require('ytdl-core');
+
 exports.run = (client, message, args) => {
     if (queue[message.guild.id] === undefined) return message.channel.send(`Ajoutez d\'abbord des musiques avec ${process.env.prefix}add`);
     if (!message.guild.voiceConnection) return commands.join(message).then(() => commands.play(message));
