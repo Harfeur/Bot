@@ -87,6 +87,13 @@ const musique = {
         });
         message.channel.send(`Queue de musiques : Actuellement **${tosend.length}** musiques dans la queue. ${(tosend.length > 15 ? '*[Sueles les 15 prochaines sont affichées]*' : '')}\n\`\`\`${tosend.slice(0, 15).join('\n')}\`\`\``);
     },
+    'join': (message) => {
+        return new Promise((resolve, reject) => {
+            const voiceChannel = message.member.voiceChannel;
+            if (!voiceChannel || voiceChannel.type !== 'voice') return message.reply('Je ne peux pas me connecter au canal audio ...');
+            voiceChannel.join().then(connection => resolve(connection)).catch(err => reject(err));
+        });
+    }
 };
 
 client.on('ready', async () => {
