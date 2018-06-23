@@ -98,9 +98,9 @@ const musique = {
 
 client.on('ready', async () => {
     client.user.setStatus("online");
-/*  client.user.setActivity('Commandes uniquement', {
+    client.user.setActivity('Fonctionnel !', {
         type: 'PLAYING'
-    }); */
+    });
     console.log("Bot prêt !");
 });
 
