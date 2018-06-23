@@ -24,7 +24,7 @@ client.on('message', message => {
 
 
     if (message.content.indexOf(process.env.prefix) !== 0) return;
-    const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+    const args = message.content.slice(process.env.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
 
     try {
