@@ -2,8 +2,6 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 client.cmds = new Discord.Collection();
 
-client.login(process.env.token);
-
 var prefix = process.env.prefix;
 
 const fs = require('fs');
@@ -39,4 +37,6 @@ client.on('message', message => {
 
     cmdf = client.cmds.get(cmd.slice(prefix.lenght));
     if (cmdf) cmdf.run(client, message, args)
-})
+});
+
+client.login(process.env.token);
