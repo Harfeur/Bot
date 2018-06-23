@@ -23,7 +23,7 @@ fs.readdir("./commandes/", (err, files) => {
     if (jsf.lenght == 0) return;
 
     jsf.forEach((f, i) => {
-        let props = require("./comandes/${f}");
+        let props = require("./commandes/${f}");
         client.cmds.Set(props.help.name, props);
     });
 });
