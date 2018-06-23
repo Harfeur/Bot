@@ -310,6 +310,7 @@ client.on('message', async msg => {
 					});
 				});
 			}
+			if (fichier.filename.endsWith('.docx') || fichier.filename.endsWith('.odt')) msgisfile = 1;
 			if (fichier.filename.endsWith('.png') && msg.author.bot) msgisfile = 1;
 		})
 		if (msgisfile == 0) {
