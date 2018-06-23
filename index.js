@@ -97,8 +97,8 @@ const musique = {
 };
 
 client.on('ready', async () => {
-    client.user.setStatus("idle");
-    client.user.setActivity('Maintenance', {
+    client.user.setStatus("online");
+    client.user.setActivity('Commandes uniquement', {
         type: 'PLAYING'
     });
     console.log("Bot prêt !");
