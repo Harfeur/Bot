@@ -310,6 +310,7 @@ client.on('message', async msg => {
 					});
 				});
 			}
+			if (fichier.filename.endsWith('.png') && msg.author.bot) msgisfile = 1;
 		})
 		if (msgisfile == 0) {
 			if (msg.content.startsWith('.valide') || msg.content.startsWith('.refuse')) {}
