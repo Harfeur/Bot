@@ -107,9 +107,19 @@ client.on('ready', async () => {
 
 client.on('message', message => {
 
+    if (message.author.bot) return;
 
+    const channel = message.channel.name;
+
+    try {
+        let channelFile = require(`./channels/${channel}.js`);
+        channelFile.run(client, message);
+    } catch (err) {
+        console.error(err);
+    }
 
     if (message.content.indexOf(process.env.prefix) !== 0) return;
+
     const args = message.content.slice(process.env.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
 
