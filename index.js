@@ -65,17 +65,17 @@ const musique = {
         })(queue[message.guild.id].songs.shift());
     },
     'add': (message) => {
-        let url = msg.content.split(' ')[1];
-        if (url == '' || url === undefined) return msg.channel.send(`Vous devez ajouter un lien YouTube après ${process.env.prefix}add`);
+        let url = message.content.split(' ')[1];
+        if (url == '' || url === undefined) return message.channel.send(`Vous devez ajouter un lien YouTube après ${process.env.prefix}add`);
         yt.getInfo(url, (err, info) => {
-            if (err) return msg.channel.send('Lien YouTube invalide: ' + err);
-            if (!queue.hasOwnProperty(msg.guild.id)) queue[msg.guild.id] = {}, queue[msg.guild.id].playing = false, queue[msg.guild.id].songs = [];
-            queue[msg.guild.id].songs.push({
+            if (err) return message.channel.send('Lien YouTube invalide: ' + err);
+            if (!queue.hasOwnProperty(message.guild.id)) queue[message.guild.id] = {}, queue[message.guild.id].playing = false, queue[message.guild.id].songs = [];
+            queue[message.guild.id].songs.push({
                 url: url,
                 title: info.title,
-                requester: msg.author.username
+                requester: message.author.username
             });
-            msg.channel.send(`**${info.title}** ajouté à la queue`);
+            message.channel.send(`**${info.title}** ajouté à la queue`);
         });
     },
     'queue': (message) => {
