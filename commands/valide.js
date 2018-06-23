@@ -4,7 +4,7 @@ exports.run = (client, message, args) => {
     if (joueur == undefined) return message.channel.send('Merci de mentionner la personne dont la facture est validée.');
     message.channel.send(joueur + ' : validé par <@!' + message.author.id + '> !', {
         files: [{
-            attachment: '../assets/valide.png',
+            attachment: './assets/valide.png',
             name: 'valide.png'
         }]
     });
