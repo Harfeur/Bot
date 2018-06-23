@@ -1,5 +1,5 @@
 exports.run = (client, message, args) => {
-    if (args == undefined) return message.channel.send("Les radios disponibles sont : **Skyrock, Funradio, RTL, TFM, RFM**");
+    if (args[0] == undefined) return message.channel.send("Les radios disponibles sont : **Skyrock, Funradio, RTL, TFM, RFM**");
     message.member.voiceChannel.leave();
     switch (args[0]) {
         case 'skyrock':
