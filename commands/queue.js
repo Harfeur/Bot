@@ -1,4 +1,4 @@
-exports.run = (client, message, args) => {
+exports.run = (client, message, args, queue) => {
 	if (queue[message.guild.id] === undefined) return message.channel.send(`Ajoutez des musiques à la queue avec ${process.env.prefix}add`);
 	let tosend = [];
 	queue[message.guild.id].songs.forEach((song, i) => {

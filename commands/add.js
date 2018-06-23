@@ -1,6 +1,6 @@
 const yt = require('ytdl-core');
 
-exports.run = (client, message, args) => {
+exports.run = (client, message, args, queue) => {
     if (args[0] === undefined) return message.channel.send(`Vous devez ajouter un lien YouTube après ${process.env.prefix}add`);
     yt.getInfo(args[0], (err, info) => {
         if (err) return message.channel.send('Lien YouTube invalide: ' + err);
