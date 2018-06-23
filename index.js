@@ -315,7 +315,6 @@ client.on('message', async msg => {
 			if (msg.startsWith('.valide') || msg.startsWith('.refuse')) {}
 			else {
 				msg.member.send("Merci d\'écrire uniquement dans le canal <#374842067983007744>");
-				break;
 			}
 		}
 	}
