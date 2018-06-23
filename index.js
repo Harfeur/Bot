@@ -295,9 +295,11 @@ client.on('message', async msg => {
 	}
 
 	if (msg.channel.name === "feuilles-de-route") {
+		msgisfile = 0;
 		fichiers = msg.attachments.array();
 		fichiers.forEach(function (fichier) {
 			if (fichier.filename.endsWith('.xlsx') || fichier.filename.endsWith('.ods')) {
+				msgisfile = 1;
 				joueurs = msg.channel.members.array();
 				joueurs.forEach(function (joueur) {
 					role = joueur.roles.array();
@@ -309,6 +311,13 @@ client.on('message', async msg => {
 				});
 			}
 		})
+		if (msgisfile == 0) {
+			if (msg.startsWith('.valide') || msg.startsWith('.refuse')) {}
+			else {
+				msg.member.send("Merci d\'écrire uniquement dans le canal <#374842067983007744>");
+				break;
+			}
+		}
 	}
 
 	if (msg.channel.name === "bienvenue") {
