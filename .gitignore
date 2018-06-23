@@ -50,4 +50,5 @@ Temporary Items
 node_modules/*
 config.json
 client_secret.json
+index-old.js
 .vscode/*
