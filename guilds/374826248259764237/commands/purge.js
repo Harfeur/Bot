@@ -1,4 +1,4 @@
-exports.run = (client, message) => {
+exports.run = async (client, message) => {
     if (message.author.id == process.env.MaxouCraft || message.author.id == process.env.Teddy) {
         const deleteCount = parseInt(args[0], 10);
         if (!deleteCount || deleteCount < 2 || deleteCount > 100)
