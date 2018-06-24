@@ -129,7 +129,14 @@ client.on('message', async message => {
     } else {
 
         try {
-            let commandFile = require(`./guilds/${guild}/commands/${command}.js`);
+            let commandSpecialFile = require(`./guilds/${guild}/commands/${command}.js`);
+            commandSpecialFile.run(client, message, args);
+        } catch (err) {
+            console.error(err);
+        }
+
+        try {
+            let commandFile = require(`./guilds/default/commands/${command}.js`);
             commandFile.run(client, message, args);
         } catch (err) {
             console.error(err);

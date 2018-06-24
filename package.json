@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "discord.js": "^11.3.2",
+    "dotenv": "^6.0.0",
     "forever": "^0.15.3",
     "googleapis": "^32.0.0",
     "node-opus": "^0.3.0",

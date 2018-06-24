@@ -51,3 +51,4 @@ node_modules/*
 client_secret.json
 index-old.js
 .vscode/*
+.env
