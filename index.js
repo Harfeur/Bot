@@ -105,14 +105,15 @@ client.on('ready', async () => {
 });
 
 
-client.on('message', message => {
+client.on('message', async message => {
 
     if (message.author.bot) return;
 
     const channel = message.channel.name;
+    const guild = message.guild.id;
 
     try {
-        let channelFile = require(`./channels/${channel}.js`);
+        let channelFile = require(`./guilds/${guild}/channels/${channel}.js`);
         channelFile.run(client, message);
     } catch (err) {
         console.error(err);
@@ -128,7 +129,7 @@ client.on('message', message => {
     } else {
 
         try {
-            let commandFile = require(`./commands/${command}.js`);
+            let commandFile = require(`./guilds/${guild}/commands/${command}.js`);
             commandFile.run(client, message, args);
         } catch (err) {
             console.error(err);
