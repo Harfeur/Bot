@@ -101,7 +101,6 @@ client.on('ready', async () => {
     client.user.setActivity('Fonctionnel !', {
         type: 'PLAYING'
     });
-    client.user.setUsername('Assistante');
     console.log("Bot prêt !");
 });
 
